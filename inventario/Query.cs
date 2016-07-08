@@ -10,20 +10,26 @@ namespace inventario
     {
         #region CREATE_TABLES
 
-        public static string CREATE_TABLE_TYPES = "CREATE TABLE IF NOT EXISTS types (type_id INT PRIMARY KEY, name VARCHAR(50))";
-        public static string CREATE_TABLE_PRODUCTS = "CREATE TABLE IF NOT EXISTS products (product_id INT PRIMARY KEY, item VARCHAR(100), unit VARCHAR(10), type INT, minimum_stock FLOAT, current_stock FLOAT, price FLOAT, FOREIGN KEY(type) REFERENCES types(type_id))";
-        public static string CREATE_TABLE_USERS = "CREATE TABLE IF NOT EXISTS users (user_id INT PRIMARY KEY, username VARCHAR(10) UNIQUE, password VARCHAR(100))";
+        public static string CREATE_TABLE_TYPES = "CREATE TABLE IF NOT EXISTS types (type_id INTEGER PRIMARY KEY, name VARCHAR(50))";
+        public static string CREATE_TABLE_PRODUCTS = "CREATE TABLE IF NOT EXISTS products (product_id INTEGER PRIMARY KEY, item VARCHAR(100), unit VARCHAR(10), type INT, minimum_stock FLOAT, current_stock FLOAT, price FLOAT, active BOOLEAN, FOREIGN KEY(type) REFERENCES types(type_id))";
+        public static string CREATE_TABLE_USERS = "CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY, username VARCHAR(10) UNIQUE, password VARCHAR(100), level INT)";
 
         #endregion
+
+        public static string INSERT_SUPER_USER = "INSERT INTO users VALUES (NULL, 'siulpolb', 'siulpolb', 0)";
+
+        public static string GET_ALL_PRODUCTS = "SELECT product_id, item, unit, types.name as type, minimum_stock, current_stock, price FROM products, types WHERE products.type = types.type_id AND products.active = 1";
 
         #region FUNCTIONS
 
         public static string Login(string user, string password)
         {
-            return "SELECT user_id FROM users WHERE username='" + user + "' AND password='" + password + "'";
+            return "SELECT user_id, level FROM users WHERE username='" + user + "' AND password='" + password + "'";
         }
 
         #endregion
+
+        public static string FILL_TEST_DATA = "INSERT INTO types VALUES(NULL, 'Refrescos');INSERT INTO types VALUES(NULL, 'Salchichoneria');INSERT INTO products VALUES (NULL,'Coca Cola 10 ml', 'pieza',1,5,10,10,1);INSERT INTO products VALUES (NULL,'Rajas 10 gr', 'pieza',1,5,10,5.5,1);";
 
     }
 }

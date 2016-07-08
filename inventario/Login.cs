@@ -15,6 +15,7 @@ namespace inventario
 
         public string Username { get; set; }
         public int UserId { get; set; }
+        public int UserLevel { get; set; }
 
         private DB db;
 
@@ -29,7 +30,9 @@ namespace inventario
             if (!isValid())
                 return;
             Username = tbUser.Text;
-            UserId = db.login(Username,tbPassword.Text);
+            int[] userData = db.login(Username,tbPassword.Text);
+            UserId = userData[0];
+            UserLevel = userData[1];
             if (UserId != -1)
             {
                 this.DialogResult = DialogResult.OK;
