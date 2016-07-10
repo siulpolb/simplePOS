@@ -34,7 +34,6 @@
 			this.entradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tbProductName = new System.Windows.Forms.TextBox();
 			this.dgvSell = new System.Windows.Forms.DataGridView();
-			this.btnAdd = new System.Windows.Forms.Button();
 			this.clmId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.clmName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.clmUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +41,8 @@
 			this.clmUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.clmTotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.clmObservations = new System.Windows.Forms.DataGridViewTextBoxColumn();
+			this.btnAdd = new System.Windows.Forms.Button();
+			this.lbTotal = new System.Windows.Forms.Label();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvSell)).BeginInit();
 			this.SuspendLayout();
@@ -104,16 +105,6 @@
 			this.dgvSell.Size = new System.Drawing.Size(813, 241);
 			this.dgvSell.TabIndex = 3;
 			// 
-			// btnAdd
-			// 
-			this.btnAdd.Location = new System.Drawing.Point(416, 44);
-			this.btnAdd.Name = "btnAdd";
-			this.btnAdd.Size = new System.Drawing.Size(75, 23);
-			this.btnAdd.TabIndex = 2;
-			this.btnAdd.Text = "Agregar";
-			this.btnAdd.UseVisualStyleBackColor = true;
-			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-			// 
 			// clmId
 			// 
 			this.clmId.HeaderText = "Código";
@@ -154,11 +145,32 @@
 			this.clmObservations.HeaderText = "Observaciones";
 			this.clmObservations.Name = "clmObservations";
 			// 
+			// btnAdd
+			// 
+			this.btnAdd.Location = new System.Drawing.Point(416, 44);
+			this.btnAdd.Name = "btnAdd";
+			this.btnAdd.Size = new System.Drawing.Size(75, 23);
+			this.btnAdd.TabIndex = 2;
+			this.btnAdd.Text = "Agregar";
+			this.btnAdd.UseVisualStyleBackColor = true;
+			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+			// 
+			// lbTotal
+			// 
+			this.lbTotal.AutoSize = true;
+			this.lbTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.lbTotal.Location = new System.Drawing.Point(565, 44);
+			this.lbTotal.Name = "lbTotal";
+			this.lbTotal.Size = new System.Drawing.Size(106, 29);
+			this.lbTotal.TabIndex = 4;
+			this.lbTotal.Text = "Total: $0";
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(837, 350);
+			this.Controls.Add(this.lbTotal);
 			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.dgvSell);
 			this.Controls.Add(this.tbProductName);
@@ -191,6 +203,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmUnitPrice;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmTotalPrice;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmObservations;
+		private System.Windows.Forms.Label lbTotal;
 	}
 }
 
