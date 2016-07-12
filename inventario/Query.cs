@@ -13,7 +13,7 @@ namespace inventario
 		public static string CREATE_TABLE_TYPES = "CREATE TABLE IF NOT EXISTS types (type_id INTEGER PRIMARY KEY, name VARCHAR(50))";
 		public static string CREATE_TABLE_PRODUCTS = "CREATE TABLE IF NOT EXISTS products (product_id INTEGER PRIMARY KEY, item VARCHAR(100), unit VARCHAR(10), type INT, minimum_stock FLOAT, current_stock FLOAT, price FLOAT, active BOOLEAN, FOREIGN KEY(type) REFERENCES types(type_id))";
 		public static string CREATE_TABLE_USERS = "CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY, username VARCHAR(10) UNIQUE, password VARCHAR(100), level INT)";
-		public static string CREATE_TABLE_SELLS = "CREATE TABLE IF NOT EXISTS sales (date DATE, time TIME, product INT, user INT, quantity FLOAT, price FLOAT)";
+		public static string CREATE_TABLE_SALES = "CREATE TABLE IF NOT EXISTS sales (date DATE, time TIME, product INT, user INT, quantity FLOAT, price FLOAT)";
 
 		#endregion
 
@@ -28,9 +28,14 @@ namespace inventario
             return "SELECT user_id, level FROM users WHERE username='" + user + "' AND password='" + password + "'";
         }
 
-		public static string Sell(int product, double quantity, string user, double price)
+		public static string Sell(int product, double quantity, int user, double price)
 		{
-			return "INSERT INTO sales VALUES ('"+ DateTime.Now.ToString("yyy-MM-dd") + "','"+DateTime.Now.ToString("HH:mm")+"',"+product+",'"+user+"',"+quantity+","+price+")";
+			return "INSERT INTO sales VALUES (date('now'),time('now')," + product + "," + user + "," + quantity + "," + price + ")";
+		}
+
+		public static string UpdateStock(int product, double quantity)
+		{
+			return "UPDATE products SET current_stock = current_stock - " + quantity + " WHERE product_id = "+product;
 		}
 
 		#endregion

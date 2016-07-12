@@ -28,23 +28,27 @@
         /// </summary>
         private void InitializeComponent()
         {
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle19 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle20 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-			this.inventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.entradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.tsmiInventario = new System.Windows.Forms.ToolStripMenuItem();
+			this.tsmiList = new System.Windows.Forms.ToolStripMenuItem();
+			this.tsmiIncomings = new System.Windows.Forms.ToolStripMenuItem();
 			this.tbProductName = new System.Windows.Forms.TextBox();
 			this.dgvSell = new System.Windows.Forms.DataGridView();
+			this.btnAdd = new System.Windows.Forms.Button();
+			this.lbTotal = new System.Windows.Forms.Label();
+			this.btnSell = new System.Windows.Forms.Button();
+			this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.clmId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.clmName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.clmUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.clmCantidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.clmUnitPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.clmTotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.clmObservations = new System.Windows.Forms.DataGridViewTextBoxColumn();
-			this.btnAdd = new System.Windows.Forms.Button();
-			this.lbTotal = new System.Windows.Forms.Label();
-			this.btnSell = new System.Windows.Forms.Button();
+			this.tsmiAdmin = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvSell)).BeginInit();
 			this.SuspendLayout();
@@ -52,33 +56,36 @@
 			// menuStrip1
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.inventarioToolStripMenuItem});
+            this.tsmiAdmin,
+            this.tsmiInventario,
+            this.cerrarSesiónToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(837, 24);
 			this.menuStrip1.TabIndex = 0;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
-			// inventarioToolStripMenuItem
+			// tsmiInventario
 			// 
-			this.inventarioToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.verToolStripMenuItem,
-            this.entradasToolStripMenuItem});
-			this.inventarioToolStripMenuItem.Name = "inventarioToolStripMenuItem";
-			this.inventarioToolStripMenuItem.Size = new System.Drawing.Size(72, 20);
-			this.inventarioToolStripMenuItem.Text = "Inventario";
+			this.tsmiInventario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiList,
+            this.tsmiIncomings});
+			this.tsmiInventario.Name = "tsmiInventario";
+			this.tsmiInventario.Size = new System.Drawing.Size(72, 20);
+			this.tsmiInventario.Text = "Inventario";
 			// 
-			// verToolStripMenuItem
+			// tsmiList
 			// 
-			this.verToolStripMenuItem.Name = "verToolStripMenuItem";
-			this.verToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-			this.verToolStripMenuItem.Text = "Ver";
+			this.tsmiList.Name = "tsmiList";
+			this.tsmiList.Size = new System.Drawing.Size(152, 22);
+			this.tsmiList.Text = "Ver";
+			this.tsmiList.Click += new System.EventHandler(this.tsmiList_Click);
 			// 
-			// entradasToolStripMenuItem
+			// tsmiIncomings
 			// 
-			this.entradasToolStripMenuItem.Name = "entradasToolStripMenuItem";
-			this.entradasToolStripMenuItem.Size = new System.Drawing.Size(119, 22);
-			this.entradasToolStripMenuItem.Text = "Entradas";
+			this.tsmiIncomings.Name = "tsmiIncomings";
+			this.tsmiIncomings.Size = new System.Drawing.Size(152, 22);
+			this.tsmiIncomings.Text = "Entradas";
 			// 
 			// tbProductName
 			// 
@@ -102,56 +109,13 @@
             this.clmUnit,
             this.clmCantidad,
             this.clmUnitPrice,
-            this.clmTotalPrice,
-            this.clmObservations});
+            this.clmTotalPrice});
 			this.dgvSell.Location = new System.Drawing.Point(12, 97);
 			this.dgvSell.Name = "dgvSell";
 			this.dgvSell.Size = new System.Drawing.Size(813, 241);
 			this.dgvSell.TabIndex = 3;
 			this.dgvSell.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSell_CellEndEdit);
-			// 
-			// clmId
-			// 
-			dataGridViewCellStyle4.Format = "000000";
-			dataGridViewCellStyle4.NullValue = null;
-			this.clmId.DefaultCellStyle = dataGridViewCellStyle4;
-			this.clmId.HeaderText = "Código";
-			this.clmId.Name = "clmId";
-			this.clmId.ReadOnly = true;
-			// 
-			// clmName
-			// 
-			this.clmName.HeaderText = "Nombre";
-			this.clmName.Name = "clmName";
-			this.clmName.ReadOnly = true;
-			// 
-			// clmUnit
-			// 
-			this.clmUnit.HeaderText = "Unidad";
-			this.clmUnit.Name = "clmUnit";
-			this.clmUnit.ReadOnly = true;
-			// 
-			// clmCantidad
-			// 
-			this.clmCantidad.HeaderText = "Cantidad";
-			this.clmCantidad.Name = "clmCantidad";
-			// 
-			// clmUnitPrice
-			// 
-			this.clmUnitPrice.HeaderText = "Precio Unitario";
-			this.clmUnitPrice.Name = "clmUnitPrice";
-			this.clmUnitPrice.ReadOnly = true;
-			// 
-			// clmTotalPrice
-			// 
-			this.clmTotalPrice.HeaderText = "Total";
-			this.clmTotalPrice.Name = "clmTotalPrice";
-			this.clmTotalPrice.ReadOnly = true;
-			// 
-			// clmObservations
-			// 
-			this.clmObservations.HeaderText = "Observaciones";
-			this.clmObservations.Name = "clmObservations";
+			this.dgvSell.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvSell_UserDeletingRow);
 			// 
 			// btnAdd
 			// 
@@ -183,6 +147,66 @@
 			this.btnSell.UseVisualStyleBackColor = true;
 			this.btnSell.Click += new System.EventHandler(this.btnSell_Click);
 			// 
+			// cerrarSesiónToolStripMenuItem
+			// 
+			this.cerrarSesiónToolStripMenuItem.Name = "cerrarSesiónToolStripMenuItem";
+			this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
+			this.cerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
+			this.cerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesiónToolStripMenuItem_Click);
+			// 
+			// clmId
+			// 
+			dataGridViewCellStyle17.Format = "000000";
+			dataGridViewCellStyle17.NullValue = null;
+			this.clmId.DefaultCellStyle = dataGridViewCellStyle17;
+			this.clmId.HeaderText = "Código";
+			this.clmId.Name = "clmId";
+			this.clmId.ReadOnly = true;
+			// 
+			// clmName
+			// 
+			this.clmName.HeaderText = "Nombre";
+			this.clmName.Name = "clmName";
+			this.clmName.ReadOnly = true;
+			// 
+			// clmUnit
+			// 
+			this.clmUnit.HeaderText = "Unidad";
+			this.clmUnit.Name = "clmUnit";
+			this.clmUnit.ReadOnly = true;
+			// 
+			// clmCantidad
+			// 
+			dataGridViewCellStyle18.Format = "N2";
+			dataGridViewCellStyle18.NullValue = null;
+			this.clmCantidad.DefaultCellStyle = dataGridViewCellStyle18;
+			this.clmCantidad.HeaderText = "Cantidad";
+			this.clmCantidad.Name = "clmCantidad";
+			// 
+			// clmUnitPrice
+			// 
+			dataGridViewCellStyle19.Format = "C2";
+			dataGridViewCellStyle19.NullValue = null;
+			this.clmUnitPrice.DefaultCellStyle = dataGridViewCellStyle19;
+			this.clmUnitPrice.HeaderText = "Precio Unitario";
+			this.clmUnitPrice.Name = "clmUnitPrice";
+			this.clmUnitPrice.ReadOnly = true;
+			// 
+			// clmTotalPrice
+			// 
+			dataGridViewCellStyle20.Format = "C2";
+			dataGridViewCellStyle20.NullValue = null;
+			this.clmTotalPrice.DefaultCellStyle = dataGridViewCellStyle20;
+			this.clmTotalPrice.HeaderText = "Total";
+			this.clmTotalPrice.Name = "clmTotalPrice";
+			this.clmTotalPrice.ReadOnly = true;
+			// 
+			// tsmiAdmin
+			// 
+			this.tsmiAdmin.Name = "tsmiAdmin";
+			this.tsmiAdmin.Size = new System.Drawing.Size(100, 20);
+			this.tsmiAdmin.Text = "Administración";
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -208,22 +232,23 @@
 
         #endregion
 
-        private System.Windows.Forms.ToolStripMenuItem inventarioToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem verToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem entradasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiInventario;
+        private System.Windows.Forms.ToolStripMenuItem tsmiList;
+        private System.Windows.Forms.ToolStripMenuItem tsmiIncomings;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.TextBox tbProductName;
         private System.Windows.Forms.DataGridView dgvSell;
         private System.Windows.Forms.Button btnAdd;
 		private System.Windows.Forms.Label lbTotal;
+		private System.Windows.Forms.Button btnSell;
+		private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmId;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmName;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmUnit;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmCantidad;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmUnitPrice;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmTotalPrice;
-		private System.Windows.Forms.DataGridViewTextBoxColumn clmObservations;
-		private System.Windows.Forms.Button btnSell;
+		private System.Windows.Forms.ToolStripMenuItem tsmiAdmin;
 	}
 }
 

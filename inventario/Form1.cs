@@ -31,41 +31,42 @@ namespace inventario
 			sellTotal = 0;
 		}
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //login();
-            loadProducts();
-            loadAutocomplete();
-        }
+		private void Form1_Load(object sender, EventArgs e)
+		{
+			//login();
+			loadProducts();
+			loadAutocomplete();
+			checkPermissions();
+		}
 
-        private void login()
-        {
-            Login login = new Login(db);
-            var result = login.ShowDialog();
-            if (login.DialogResult != DialogResult.OK)
-                this.Close();
-            username = login.Username;
-            userId = login.UserId;
-            userLevel = login.UserLevel;
-        }
+		private void login()
+		{
+			Login login = new Login(db);
+			var result = login.ShowDialog();
+			if (login.DialogResult != DialogResult.OK)
+				this.Close();
+			username = login.Username;
+			userId = login.UserId;
+			userLevel = login.UserLevel;
+		}
 
-        private void loadAutocomplete()
-        {
-            var source = new AutoCompleteStringCollection();
-            source.AddRange(productNames.Keys.ToArray());
-            tbProductName.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            tbProductName.AutoCompleteCustomSource = source;
-            tbProductName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-        }
+		private void loadAutocomplete()
+		{
+			var source = new AutoCompleteStringCollection();
+			source.AddRange(productNames.Keys.ToArray());
+			tbProductName.AutoCompleteSource = AutoCompleteSource.CustomSource;
+			tbProductName.AutoCompleteCustomSource = source;
+			tbProductName.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+		}
 
-        private void loadProducts()
-        {
-            productNames.Clear();
-            products.Clear();
-            products = db.getAllProducts();
-            foreach(Product product in products)
-                productNames.Add(product.Name, product.Id);
-        }
+		private void loadProducts()
+		{
+			productNames.Clear();
+			products.Clear();
+			products = db.getAllProducts();
+			foreach(Product product in products)
+				productNames.Add(product.Name, product.Id);
+		}
 
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
@@ -75,32 +76,36 @@ namespace inventario
 			if(productNames.TryGetValue(tbProductName.Text,out id))//si el producto existe
 			{
 				Product product = getProductById(id);
-				if (sell.ContainsKey(product.Id))//si ya esta en el carrito
+				if (product.Stock > 0)
 				{
-					sell[product.Id] += 1;
-					for(int i = 0; i < dgvSell.Rows.Count; i++)
+					if (sell.ContainsKey(product.Id))//si ya esta en el carrito
 					{
-						if (Convert.ToInt32(dgvSell.Rows[i].Cells[0].Value) == product.Id)
+						sell[product.Id] += 1;
+						for (int i = 0; i < dgvSell.Rows.Count; i++)
 						{
-							dgvSell.Rows[i].Cells[3].Value = sell[product.Id];
-							dgvSell.Rows[i].Cells[5].Value = sell[product.Id] * product.Price;
+							if (Convert.ToInt32(dgvSell.Rows[i].Cells[0].Value) == product.Id)
+							{
+								dgvSell.Rows[i].Cells[3].Value = sell[product.Id];
+								dgvSell.Rows[i].Cells[5].Value = sell[product.Id] * product.Price;
+							}
 						}
 					}
+					else
+					{
+						sell.Add(product.Id, 1);
+						object[] values = new object[6];
+						values[0] = product.Id;
+						values[1] = product.Name;
+						values[2] = product.Unit;
+						values[3] = 1.0; //cantidad
+						values[4] = product.Price;
+						values[5] = product.Price;//Total
+						dgvSell.Rows.Add(values);
+					}
+					updateTotal(product.Price, true);
 				}
 				else
-				{
-					sell.Add(product.Id, 1);
-					object[] values = new object[7];
-					values[0] = product.Id;
-					values[1] = product.Name;
-					values[2] = product.Unit;
-					values[3] = 1.0; //cantidad
-					values[4] = product.Price;
-					values[5] = product.Price;//Total
-					values[6] = "";
-					dgvSell.Rows.Add(values);
-				}
-				updateTotal(product.Price, true);
+					MessageBox.Show("Producto sin Existencias");
 			}
 			tbProductName.Text = "";
 		}
@@ -118,8 +123,17 @@ namespace inventario
 		{
 			if(e.ColumnIndex == 3)
 			{
+				double quantity = 0;
 				int product_id = (int)dgvSell.Rows[e.RowIndex].Cells[0].Value;
-				double quantity = Convert.ToDouble(dgvSell.Rows[e.RowIndex].Cells[3].Value);
+				try
+				{
+					quantity = Convert.ToDouble(dgvSell.Rows[e.RowIndex].Cells[3].Value);
+				}
+				catch(Exception)
+				{
+					dgvSell.Rows[e.RowIndex].Cells[3].Value = sell[product_id];//si no es un numero
+					return;
+				}
 				Product p = getProductById(product_id);
 				if (quantity > p.Stock)
 				{
@@ -164,7 +178,53 @@ namespace inventario
 
 		private void btnSell_Click(object sender, EventArgs e)
 		{
-			Query.Sell(1, 1,"siulpolb",10);
+			int[] ids = new int[sell.Keys.Count];
+			double[] quantitys = new double[sell.Keys.Count];
+			double[] prices = new double[sell.Keys.Count];
+			int i = 0;
+			foreach (KeyValuePair<int, double> p in sell)
+			{
+				ids[i] = p.Key;
+				quantitys[i] = p.Value;
+				Product prod = getProductById(p.Key);
+				prices[i] = prod.Price;
+				i++;
+			}
+			db.sell(ids,quantitys,userId,prices);
+			sell.Clear();
+			dgvSell.Rows.Clear();
+			loadProducts();
+			loadAutocomplete();
+			lbTotal.Text = "Total: $0";
+			sellTotal = 0;
+			MessageBox.Show("Venta Exitosa");
+		}
+
+		private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			Application.Restart();
+		}
+
+		private void checkPermissions()
+		{
+			if(userLevel != 0)
+			{
+				tsmiAdmin.Enabled = false;
+			}
+		}
+
+		private void dgvSell_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
+		{
+			int product_id = (int)e.Row.Cells[0].Value;
+			Product p = getProductById(product_id);
+			updateTotal(p.Price * sell[product_id], false);
+			sell.Remove(product_id);
+		}
+
+		private void tsmiList_Click(object sender, EventArgs e)
+		{
+			List list = new List(db);
+			list.ShowDialog();
 		}
 	}
 }

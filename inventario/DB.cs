@@ -35,6 +35,9 @@ namespace inventario
 			query = Query.CREATE_TABLE_USERS;
 			command = new SQLiteCommand(query, connection);
 			command.ExecuteNonQuery();
+			query = Query.CREATE_TABLE_SALES;
+			command = new SQLiteCommand(query, connection);
+			command.ExecuteNonQuery();
 			transaction.Commit();
 			try
 			{
@@ -97,9 +100,23 @@ namespace inventario
 			return products;
 		}
 
-		public void sell()
+		public void sell(int[] product, double[] quantity, int user, double[] price)
 		{
-
+			string query;
+			SQLiteCommand command;
+			connection.Open();
+			SQLiteTransaction transaction = connection.BeginTransaction();
+			for (int i = 0; i < product.Length; i++)
+			{
+				query = Query.Sell(product[i], quantity[i], user, price[i]);
+				command = new SQLiteCommand(query, connection);
+				command.ExecuteNonQuery();
+				query = Query.UpdateStock(product[i], quantity[i]);
+				command = new SQLiteCommand(query, connection);
+				command.ExecuteNonQuery();
+			}
+			transaction.Commit();
+			connection.Close();
 		}
 	}
 }
