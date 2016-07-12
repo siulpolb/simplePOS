@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.inventarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.verToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,6 +44,7 @@
 			this.clmObservations = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.lbTotal = new System.Windows.Forms.Label();
+			this.btnSell = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvSell)).BeginInit();
 			this.SuspendLayout();
@@ -84,9 +86,11 @@
 			this.tbProductName.Name = "tbProductName";
 			this.tbProductName.Size = new System.Drawing.Size(398, 20);
 			this.tbProductName.TabIndex = 1;
+			this.tbProductName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbProductName_KeyDown);
 			// 
 			// dgvSell
 			// 
+			this.dgvSell.AllowUserToAddRows = false;
 			this.dgvSell.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -104,9 +108,13 @@
 			this.dgvSell.Name = "dgvSell";
 			this.dgvSell.Size = new System.Drawing.Size(813, 241);
 			this.dgvSell.TabIndex = 3;
+			this.dgvSell.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSell_CellEndEdit);
 			// 
 			// clmId
 			// 
+			dataGridViewCellStyle4.Format = "000000";
+			dataGridViewCellStyle4.NullValue = null;
+			this.clmId.DefaultCellStyle = dataGridViewCellStyle4;
 			this.clmId.HeaderText = "Código";
 			this.clmId.Name = "clmId";
 			this.clmId.ReadOnly = true;
@@ -159,17 +167,28 @@
 			// 
 			this.lbTotal.AutoSize = true;
 			this.lbTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.lbTotal.Location = new System.Drawing.Point(565, 44);
+			this.lbTotal.Location = new System.Drawing.Point(530, 44);
 			this.lbTotal.Name = "lbTotal";
 			this.lbTotal.Size = new System.Drawing.Size(106, 29);
 			this.lbTotal.TabIndex = 4;
 			this.lbTotal.Text = "Total: $0";
+			// 
+			// btnSell
+			// 
+			this.btnSell.Location = new System.Drawing.Point(750, 44);
+			this.btnSell.Name = "btnSell";
+			this.btnSell.Size = new System.Drawing.Size(75, 23);
+			this.btnSell.TabIndex = 5;
+			this.btnSell.Text = "Venta";
+			this.btnSell.UseVisualStyleBackColor = true;
+			this.btnSell.Click += new System.EventHandler(this.btnSell_Click);
 			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(837, 350);
+			this.Controls.Add(this.btnSell);
 			this.Controls.Add(this.lbTotal);
 			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.dgvSell);
@@ -196,6 +215,7 @@
         private System.Windows.Forms.TextBox tbProductName;
         private System.Windows.Forms.DataGridView dgvSell;
         private System.Windows.Forms.Button btnAdd;
+		private System.Windows.Forms.Label lbTotal;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmId;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmName;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmUnit;
@@ -203,7 +223,7 @@
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmUnitPrice;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmTotalPrice;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmObservations;
-		private System.Windows.Forms.Label lbTotal;
+		private System.Windows.Forms.Button btnSell;
 	}
 }
 
