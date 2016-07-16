@@ -12,30 +12,39 @@ namespace inventario
 
 		public static string CREATE_TABLE_TYPES = "CREATE TABLE IF NOT EXISTS types (type_id INTEGER PRIMARY KEY, name VARCHAR(50))";
 		public static string CREATE_TABLE_PRODUCTS = "CREATE TABLE IF NOT EXISTS products (product_id INTEGER PRIMARY KEY, item VARCHAR(100), unit VARCHAR(10), type INT, minimum_stock FLOAT, current_stock FLOAT, price FLOAT, active BOOLEAN, FOREIGN KEY(type) REFERENCES types(type_id))";
-		public static string CREATE_TABLE_USERS = "CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY, username VARCHAR(10) UNIQUE, password VARCHAR(100), level INT)";
+		public static string CREATE_TABLE_USERS = "CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY, username VARCHAR(10) UNIQUE, password VARCHAR(100), level INT, active INT)";
 		public static string CREATE_TABLE_SALES = "CREATE TABLE IF NOT EXISTS sales (date DATE, time TIME, product INT, user INT, quantity FLOAT, price FLOAT)";
+		public static string CREATE_TABLE_INCOMES = "CREATE TABLE IF NOT EXISTS incomes (date DATE, time TIME, product INT, user INT,  quantity FLOAT, price FLOAT)";
 
 		#endregion
 
-		public static string INSERT_SUPER_USER = "INSERT INTO users VALUES (NULL, 'siulpolb', 'siulpolb', 0)";
+		public static string INSERT_SUPER_USER = "INSERT INTO users VALUES (NULL, 'admin', 'admin', 0,1)";
 
 		public static string GET_ALL_PRODUCTS = "SELECT product_id, item, unit, types.name as type, minimum_stock, current_stock, price FROM products, types WHERE products.type = types.type_id AND products.active = 1";
 
 		#region FUNCTIONS
 
 		public static string Login(string user, string password)
-        {
-            return "SELECT user_id, level FROM users WHERE username='" + user + "' AND password='" + password + "'";
-        }
+		{
+			return "SELECT user_id, level FROM users WHERE username='" + user + "' AND password='" + password + "' AND active = 1";
+		}
 
 		public static string Sell(int product, double quantity, int user, double price)
 		{
 			return "INSERT INTO sales VALUES (date('now'),time('now')," + product + "," + user + "," + quantity + "," + price + ")";
 		}
 
-		public static string UpdateStock(int product, double quantity)
+		public static string Buy(int product, double quantity, int user, double price)
 		{
-			return "UPDATE products SET current_stock = current_stock - " + quantity + " WHERE product_id = "+product;
+			return "INSERT INTO sales VALUES (date('now'),time('now')," + product + "," + user + "," + quantity + "," + price + ")";
+		}
+
+		public static string UpdateStock(int product, double quantity, bool increase)
+		{
+			string query = "UPDATE products SET current_stock = current_stock";
+			query += (increase) ? " + " : " - ";
+			query += quantity + " WHERE product_id = "+product;
+			return query;
 		}
 
 		#endregion

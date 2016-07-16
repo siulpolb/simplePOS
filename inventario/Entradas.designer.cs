@@ -1,6 +1,6 @@
 ﻿namespace inventario
 {
-    partial class Form1
+    partial class Entradas
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -28,16 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.tsmiAdmin = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiInventario = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiList = new System.Windows.Forms.ToolStripMenuItem();
-			this.tsmiIncomings = new System.Windows.Forms.ToolStripMenuItem();
-			this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.tbProductName = new System.Windows.Forms.TextBox();
 			this.dgvSell = new System.Windows.Forms.DataGridView();
 			this.clmId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,7 +46,7 @@
 			this.clmTotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.lbTotal = new System.Windows.Forms.Label();
-			this.btnSell = new System.Windows.Forms.Button();
+			this.btnBuy = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvSell)).BeginInit();
 			this.SuspendLayout();
@@ -57,8 +55,7 @@
 			// 
 			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiAdmin,
-            this.tsmiInventario,
-            this.cerrarSesiónToolStripMenuItem});
+            this.tsmiInventario});
 			this.menuStrip1.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip1.Name = "menuStrip1";
 			this.menuStrip1.Size = new System.Drawing.Size(837, 24);
@@ -74,8 +71,7 @@
 			// tsmiInventario
 			// 
 			this.tsmiInventario.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsmiList,
-            this.tsmiIncomings});
+            this.tsmiList});
 			this.tsmiInventario.Name = "tsmiInventario";
 			this.tsmiInventario.Size = new System.Drawing.Size(72, 20);
 			this.tsmiInventario.Text = "Inventario";
@@ -86,19 +82,6 @@
 			this.tsmiList.Size = new System.Drawing.Size(119, 22);
 			this.tsmiList.Text = "Ver";
 			this.tsmiList.Click += new System.EventHandler(this.tsmiList_Click);
-			// 
-			// tsmiIncomings
-			// 
-			this.tsmiIncomings.Name = "tsmiIncomings";
-			this.tsmiIncomings.Size = new System.Drawing.Size(119, 22);
-			this.tsmiIncomings.Text = "Entradas";
-			// 
-			// cerrarSesiónToolStripMenuItem
-			// 
-			this.cerrarSesiónToolStripMenuItem.Name = "cerrarSesiónToolStripMenuItem";
-			this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(88, 20);
-			this.cerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
-			this.cerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesiónToolStripMenuItem_Click);
 			// 
 			// tbProductName
 			// 
@@ -132,9 +115,9 @@
 			// 
 			// clmId
 			// 
-			dataGridViewCellStyle1.Format = "000000";
-			dataGridViewCellStyle1.NullValue = null;
-			this.clmId.DefaultCellStyle = dataGridViewCellStyle1;
+			dataGridViewCellStyle13.Format = "000000";
+			dataGridViewCellStyle13.NullValue = null;
+			this.clmId.DefaultCellStyle = dataGridViewCellStyle13;
 			this.clmId.HeaderText = "Código";
 			this.clmId.Name = "clmId";
 			this.clmId.ReadOnly = true;
@@ -153,26 +136,26 @@
 			// 
 			// clmCantidad
 			// 
-			dataGridViewCellStyle2.Format = "N2";
-			dataGridViewCellStyle2.NullValue = null;
-			this.clmCantidad.DefaultCellStyle = dataGridViewCellStyle2;
+			dataGridViewCellStyle14.Format = "N2";
+			dataGridViewCellStyle14.NullValue = null;
+			this.clmCantidad.DefaultCellStyle = dataGridViewCellStyle14;
 			this.clmCantidad.HeaderText = "Cantidad";
 			this.clmCantidad.Name = "clmCantidad";
 			// 
 			// clmUnitPrice
 			// 
-			dataGridViewCellStyle3.Format = "C2";
-			dataGridViewCellStyle3.NullValue = null;
-			this.clmUnitPrice.DefaultCellStyle = dataGridViewCellStyle3;
+			dataGridViewCellStyle15.Format = "C2";
+			dataGridViewCellStyle15.NullValue = null;
+			this.clmUnitPrice.DefaultCellStyle = dataGridViewCellStyle15;
 			this.clmUnitPrice.HeaderText = "Precio Unitario";
 			this.clmUnitPrice.Name = "clmUnitPrice";
 			this.clmUnitPrice.ReadOnly = true;
 			// 
 			// clmTotalPrice
 			// 
-			dataGridViewCellStyle4.Format = "C2";
-			dataGridViewCellStyle4.NullValue = null;
-			this.clmTotalPrice.DefaultCellStyle = dataGridViewCellStyle4;
+			dataGridViewCellStyle16.Format = "C2";
+			dataGridViewCellStyle16.NullValue = null;
+			this.clmTotalPrice.DefaultCellStyle = dataGridViewCellStyle16;
 			this.clmTotalPrice.HeaderText = "Total";
 			this.clmTotalPrice.Name = "clmTotalPrice";
 			this.clmTotalPrice.ReadOnly = true;
@@ -197,31 +180,31 @@
 			this.lbTotal.TabIndex = 4;
 			this.lbTotal.Text = "Total: $0";
 			// 
-			// btnSell
+			// btnBuy
 			// 
-			this.btnSell.Location = new System.Drawing.Point(750, 44);
-			this.btnSell.Name = "btnSell";
-			this.btnSell.Size = new System.Drawing.Size(75, 23);
-			this.btnSell.TabIndex = 5;
-			this.btnSell.Text = "Venta";
-			this.btnSell.UseVisualStyleBackColor = true;
-			this.btnSell.Click += new System.EventHandler(this.btnSell_Click);
+			this.btnBuy.Location = new System.Drawing.Point(750, 44);
+			this.btnBuy.Name = "btnBuy";
+			this.btnBuy.Size = new System.Drawing.Size(75, 23);
+			this.btnBuy.TabIndex = 5;
+			this.btnBuy.Text = "Compra";
+			this.btnBuy.UseVisualStyleBackColor = true;
+			this.btnBuy.Click += new System.EventHandler(this.btnBuy_Click);
 			// 
-			// Form1
+			// Entradas
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(837, 350);
-			this.Controls.Add(this.btnSell);
+			this.Controls.Add(this.btnBuy);
 			this.Controls.Add(this.lbTotal);
 			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.dgvSell);
 			this.Controls.Add(this.tbProductName);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
-			this.Name = "Form1";
-			this.Text = "Ventas";
-			this.Load += new System.EventHandler(this.Form1_Load);
+			this.Name = "Entradas";
+			this.Text = "Entradas";
+			this.Load += new System.EventHandler(this.Entradas_Load);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.dgvSell)).EndInit();
@@ -234,14 +217,12 @@
 
         private System.Windows.Forms.ToolStripMenuItem tsmiInventario;
         private System.Windows.Forms.ToolStripMenuItem tsmiList;
-        private System.Windows.Forms.ToolStripMenuItem tsmiIncomings;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.TextBox tbProductName;
         private System.Windows.Forms.DataGridView dgvSell;
         private System.Windows.Forms.Button btnAdd;
 		private System.Windows.Forms.Label lbTotal;
-		private System.Windows.Forms.Button btnSell;
-		private System.Windows.Forms.ToolStripMenuItem cerrarSesiónToolStripMenuItem;
+		private System.Windows.Forms.Button btnBuy;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmId;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmName;
 		private System.Windows.Forms.DataGridViewTextBoxColumn clmUnit;

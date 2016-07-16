@@ -28,6 +28,10 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.dgvList = new System.Windows.Forms.DataGridView();
 			this.clmId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.clmName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +65,9 @@
 			// 
 			// clmId
 			// 
+			dataGridViewCellStyle1.Format = "000000";
+			dataGridViewCellStyle1.NullValue = null;
+			this.clmId.DefaultCellStyle = dataGridViewCellStyle1;
 			this.clmId.HeaderText = "Código";
 			this.clmId.Name = "clmId";
 			this.clmId.ReadOnly = true;
@@ -85,18 +92,28 @@
 			// 
 			// clmMinimum
 			// 
+			dataGridViewCellStyle2.Format = "N2";
+			dataGridViewCellStyle2.NullValue = null;
+			this.clmMinimum.DefaultCellStyle = dataGridViewCellStyle2;
 			this.clmMinimum.HeaderText = "Stock Minimo";
 			this.clmMinimum.Name = "clmMinimum";
 			this.clmMinimum.ReadOnly = true;
 			// 
 			// clmStock
 			// 
+			dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			dataGridViewCellStyle3.Format = "N2";
+			dataGridViewCellStyle3.NullValue = null;
+			this.clmStock.DefaultCellStyle = dataGridViewCellStyle3;
 			this.clmStock.HeaderText = "Stock";
 			this.clmStock.Name = "clmStock";
 			this.clmStock.ReadOnly = true;
 			// 
 			// clmPrice
 			// 
+			dataGridViewCellStyle4.Format = "C2";
+			dataGridViewCellStyle4.NullValue = null;
+			this.clmPrice.DefaultCellStyle = dataGridViewCellStyle4;
 			this.clmPrice.HeaderText = "Precio";
 			this.clmPrice.Name = "clmPrice";
 			this.clmPrice.ReadOnly = true;

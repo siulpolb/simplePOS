@@ -22,8 +22,10 @@ namespace inventario
 			foreach(Product p in products)
 			{
 				dgvList.Rows.Add(p.toObjectArray());
-				//if(p.Stock < 1)
-					
+				if(p.Stock < p.MinimumStock)
+					dgvList.Rows[dgvList.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Yellow;
+				if (p.Stock < 1)
+					dgvList.Rows[dgvList.Rows.Count - 1].DefaultCellStyle.BackColor = Color.Red;
 			}
 		}
 	}
