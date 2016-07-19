@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
-			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+			System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.tsmiAdmin = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiInventario = new System.Windows.Forms.ToolStripMenuItem();
 			this.tsmiList = new System.Windows.Forms.ToolStripMenuItem();
 			this.tbProductName = new System.Windows.Forms.TextBox();
-			this.dgvSell = new System.Windows.Forms.DataGridView();
+			this.dgvBuy = new System.Windows.Forms.DataGridView();
 			this.clmId = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.clmName = new System.Windows.Forms.DataGridViewTextBoxColumn();
 			this.clmUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,7 +48,7 @@
 			this.lbTotal = new System.Windows.Forms.Label();
 			this.btnBuy = new System.Windows.Forms.Button();
 			this.menuStrip1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dgvSell)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvBuy)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -79,7 +79,7 @@
 			// tsmiList
 			// 
 			this.tsmiList.Name = "tsmiList";
-			this.tsmiList.Size = new System.Drawing.Size(119, 22);
+			this.tsmiList.Size = new System.Drawing.Size(90, 22);
 			this.tsmiList.Text = "Ver";
 			this.tsmiList.Click += new System.EventHandler(this.tsmiList_Click);
 			// 
@@ -91,33 +91,33 @@
 			this.tbProductName.TabIndex = 1;
 			this.tbProductName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbProductName_KeyDown);
 			// 
-			// dgvSell
+			// dgvBuy
 			// 
-			this.dgvSell.AllowUserToAddRows = false;
-			this.dgvSell.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.dgvBuy.AllowUserToAddRows = false;
+			this.dgvBuy.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.dgvSell.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-			this.dgvSell.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dgvSell.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+			this.dgvBuy.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+			this.dgvBuy.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgvBuy.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clmId,
             this.clmName,
             this.clmUnit,
             this.clmCantidad,
             this.clmUnitPrice,
             this.clmTotalPrice});
-			this.dgvSell.Location = new System.Drawing.Point(12, 97);
-			this.dgvSell.Name = "dgvSell";
-			this.dgvSell.Size = new System.Drawing.Size(813, 241);
-			this.dgvSell.TabIndex = 3;
-			this.dgvSell.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSell_CellEndEdit);
-			this.dgvSell.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvSell_UserDeletingRow);
+			this.dgvBuy.Location = new System.Drawing.Point(12, 97);
+			this.dgvBuy.Name = "dgvBuy";
+			this.dgvBuy.Size = new System.Drawing.Size(813, 241);
+			this.dgvBuy.TabIndex = 3;
+			this.dgvBuy.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSell_CellEndEdit);
+			this.dgvBuy.UserDeletingRow += new System.Windows.Forms.DataGridViewRowCancelEventHandler(this.dgvSell_UserDeletingRow);
 			// 
 			// clmId
 			// 
-			dataGridViewCellStyle13.Format = "000000";
-			dataGridViewCellStyle13.NullValue = null;
-			this.clmId.DefaultCellStyle = dataGridViewCellStyle13;
+			dataGridViewCellStyle1.Format = "000000";
+			dataGridViewCellStyle1.NullValue = null;
+			this.clmId.DefaultCellStyle = dataGridViewCellStyle1;
 			this.clmId.HeaderText = "Código";
 			this.clmId.Name = "clmId";
 			this.clmId.ReadOnly = true;
@@ -136,26 +136,26 @@
 			// 
 			// clmCantidad
 			// 
-			dataGridViewCellStyle14.Format = "N2";
-			dataGridViewCellStyle14.NullValue = null;
-			this.clmCantidad.DefaultCellStyle = dataGridViewCellStyle14;
+			dataGridViewCellStyle2.Format = "N2";
+			dataGridViewCellStyle2.NullValue = null;
+			this.clmCantidad.DefaultCellStyle = dataGridViewCellStyle2;
 			this.clmCantidad.HeaderText = "Cantidad";
 			this.clmCantidad.Name = "clmCantidad";
 			// 
 			// clmUnitPrice
 			// 
-			dataGridViewCellStyle15.Format = "C2";
-			dataGridViewCellStyle15.NullValue = null;
-			this.clmUnitPrice.DefaultCellStyle = dataGridViewCellStyle15;
+			dataGridViewCellStyle3.Format = "C2";
+			dataGridViewCellStyle3.NullValue = null;
+			this.clmUnitPrice.DefaultCellStyle = dataGridViewCellStyle3;
 			this.clmUnitPrice.HeaderText = "Precio Unitario";
 			this.clmUnitPrice.Name = "clmUnitPrice";
 			this.clmUnitPrice.ReadOnly = true;
 			// 
 			// clmTotalPrice
 			// 
-			dataGridViewCellStyle16.Format = "C2";
-			dataGridViewCellStyle16.NullValue = null;
-			this.clmTotalPrice.DefaultCellStyle = dataGridViewCellStyle16;
+			dataGridViewCellStyle4.Format = "C2";
+			dataGridViewCellStyle4.NullValue = null;
+			this.clmTotalPrice.DefaultCellStyle = dataGridViewCellStyle4;
 			this.clmTotalPrice.HeaderText = "Total";
 			this.clmTotalPrice.Name = "clmTotalPrice";
 			this.clmTotalPrice.ReadOnly = true;
@@ -198,7 +198,7 @@
 			this.Controls.Add(this.btnBuy);
 			this.Controls.Add(this.lbTotal);
 			this.Controls.Add(this.btnAdd);
-			this.Controls.Add(this.dgvSell);
+			this.Controls.Add(this.dgvBuy);
 			this.Controls.Add(this.tbProductName);
 			this.Controls.Add(this.menuStrip1);
 			this.MainMenuStrip = this.menuStrip1;
@@ -207,7 +207,7 @@
 			this.Load += new System.EventHandler(this.Entradas_Load);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.dgvSell)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.dgvBuy)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -219,7 +219,7 @@
         private System.Windows.Forms.ToolStripMenuItem tsmiList;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.TextBox tbProductName;
-        private System.Windows.Forms.DataGridView dgvSell;
+        private System.Windows.Forms.DataGridView dgvBuy;
         private System.Windows.Forms.Button btnAdd;
 		private System.Windows.Forms.Label lbTotal;
 		private System.Windows.Forms.Button btnBuy;

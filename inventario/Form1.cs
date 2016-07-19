@@ -226,5 +226,13 @@ namespace inventario
 			List list = new List(db);
 			list.ShowDialog();
 		}
+
+		private void tsmiIncomings_Click(object sender, EventArgs e)
+		{
+			Entradas entrada = new Entradas(db);
+			entrada.ShowDialog();
+			loadProducts();
+			loadAutocomplete();
+		}
 	}
 }

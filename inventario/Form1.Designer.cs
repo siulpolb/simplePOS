@@ -83,15 +83,16 @@
 			// tsmiList
 			// 
 			this.tsmiList.Name = "tsmiList";
-			this.tsmiList.Size = new System.Drawing.Size(119, 22);
+			this.tsmiList.Size = new System.Drawing.Size(152, 22);
 			this.tsmiList.Text = "Ver";
 			this.tsmiList.Click += new System.EventHandler(this.tsmiList_Click);
 			// 
 			// tsmiIncomings
 			// 
 			this.tsmiIncomings.Name = "tsmiIncomings";
-			this.tsmiIncomings.Size = new System.Drawing.Size(119, 22);
+			this.tsmiIncomings.Size = new System.Drawing.Size(152, 22);
 			this.tsmiIncomings.Text = "Entradas";
+			this.tsmiIncomings.Click += new System.EventHandler(this.tsmiIncomings_Click);
 			// 
 			// cerrarSesiónToolStripMenuItem
 			// 

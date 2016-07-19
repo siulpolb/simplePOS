@@ -18,36 +18,24 @@ namespace inventario
 		private int userLevel;
 		private Dictionary<string, int> productNames;
 		private List<Product> products;
-		private Dictionary<int, double> sell;//id,cantidad
-		private double sellTotal;
+		private Dictionary<int, double> buy;//id,cantidad
+		private double buyTotal;
 
-		public Entradas()
+		public Entradas(DB db)
 		{
 			InitializeComponent();
-			db = new DB();
+			this.db = db;
 			productNames = new Dictionary<string, int>();
 			products = new List<Product>();
-			sell = new Dictionary<int, double>();
-			sellTotal = 0;
+			buy = new Dictionary<int, double>();
+			buyTotal = 0;
 		}
 
 		private void Entradas_Load(object sender, EventArgs e)
 		{
-			//login();
 			loadProducts();
 			loadAutocomplete();
 			checkPermissions();
-		}
-
-		private void login()
-		{
-			Login login = new Login(db);
-			var result = login.ShowDialog();
-			if (login.DialogResult != DialogResult.OK)
-				this.Close();
-			username = login.Username;
-			userId = login.UserId;
-			userLevel = login.UserLevel;
 		}
 
 		private void loadAutocomplete()
@@ -78,21 +66,21 @@ namespace inventario
 				Product product = getProductById(id);
 				if (product.Stock > 0)
 				{
-					if (sell.ContainsKey(product.Id))//si ya esta en el carrito
+					if (buy.ContainsKey(product.Id))//si ya esta en el carrito
 					{
-						sell[product.Id] += 1;
-						for (int i = 0; i < dgvSell.Rows.Count; i++)
+						buy[product.Id] += 1;
+						for (int i = 0; i < dgvBuy.Rows.Count; i++)
 						{
-							if (Convert.ToInt32(dgvSell.Rows[i].Cells[0].Value) == product.Id)
+							if (Convert.ToInt32(dgvBuy.Rows[i].Cells[0].Value) == product.Id)
 							{
-								dgvSell.Rows[i].Cells[3].Value = sell[product.Id];
-								dgvSell.Rows[i].Cells[5].Value = sell[product.Id] * product.Price;
+								dgvBuy.Rows[i].Cells[3].Value = buy[product.Id];
+								dgvBuy.Rows[i].Cells[5].Value = buy[product.Id] * product.Price;
 							}
 						}
 					}
 					else
 					{
-						sell.Add(product.Id, 1);
+						buy.Add(product.Id, 1);
 						object[] values = new object[6];
 						values[0] = product.Id;
 						values[1] = product.Name;
@@ -100,7 +88,7 @@ namespace inventario
 						values[3] = 1.0; //cantidad
 						values[4] = product.Price;
 						values[5] = product.Price;//Total
-						dgvSell.Rows.Add(values);
+						dgvBuy.Rows.Add(values);
 					}
 					updateTotal(product.Price, true);
 				}
@@ -113,10 +101,10 @@ namespace inventario
 		private void updateTotal(double amount, bool increase)
 		{
 			if (increase)
-				sellTotal += amount;
+				buyTotal += amount;
 			else
-				sellTotal -= amount;
-			lbTotal.Text = "Total: $" + sellTotal.ToString();
+				buyTotal -= amount;
+			lbTotal.Text = "Total: $" + buyTotal.ToString();
 		}
 
 		private void dgvSell_CellEndEdit(object sender, DataGridViewCellEventArgs e)
@@ -124,34 +112,34 @@ namespace inventario
 			if(e.ColumnIndex == 3)
 			{
 				double quantity = 0;
-				int product_id = (int)dgvSell.Rows[e.RowIndex].Cells[0].Value;
+				int product_id = (int)dgvBuy.Rows[e.RowIndex].Cells[0].Value;
 				try
 				{
-					quantity = Convert.ToDouble(dgvSell.Rows[e.RowIndex].Cells[3].Value);
+					quantity = Convert.ToDouble(dgvBuy.Rows[e.RowIndex].Cells[3].Value);
 				}
 				catch(Exception)
 				{
-					dgvSell.Rows[e.RowIndex].Cells[3].Value = sell[product_id];//si no es un numero
+					dgvBuy.Rows[e.RowIndex].Cells[3].Value = buy[product_id];//si no es un numero
 					return;
 				}
 				Product p = getProductById(product_id);
 				if (quantity > p.Stock)
 				{
 					quantity = p.Stock;
-					dgvSell.Rows[e.RowIndex].Cells[3].Value = quantity;
+					dgvBuy.Rows[e.RowIndex].Cells[3].Value = quantity;
 				}
-				dgvSell.Rows[e.RowIndex].Cells[5].Value = sell[p.Id] * p.Price;
-				updateTotal(p.Price * sell[product_id], false);
+				dgvBuy.Rows[e.RowIndex].Cells[5].Value = buy[p.Id] * p.Price;
+				updateTotal(p.Price * buy[product_id], false);
 				if (quantity < 1)
 				{
-					sell.Remove(product_id);
-					dgvSell.Rows.RemoveAt(e.RowIndex);
+					buy.Remove(product_id);
+					dgvBuy.Rows.RemoveAt(e.RowIndex);
 				}
 				else
 				{
-					sell[product_id] = quantity;
-					updateTotal(p.Price * sell[product_id], true);
-					dgvSell.Rows[e.RowIndex].Cells[5].Value = sell[p.Id] * p.Price;
+					buy[product_id] = quantity;
+					updateTotal(p.Price * buy[product_id], true);
+					dgvBuy.Rows[e.RowIndex].Cells[5].Value = buy[p.Id] * p.Price;
 				}
 			}
 		}
@@ -188,8 +176,8 @@ namespace inventario
 		{
 			int product_id = (int)e.Row.Cells[0].Value;
 			Product p = getProductById(product_id);
-			updateTotal(p.Price * sell[product_id], false);
-			sell.Remove(product_id);
+			updateTotal(p.Price * buy[product_id], false);
+			buy.Remove(product_id);
 		}
 
 		private void tsmiList_Click(object sender, EventArgs e)
@@ -200,11 +188,11 @@ namespace inventario
 
 		private void btnBuy_Click(object sender, EventArgs e)
 		{
-			int[] ids = new int[sell.Keys.Count];
-			double[] quantitys = new double[sell.Keys.Count];
-			double[] prices = new double[sell.Keys.Count];
+			int[] ids = new int[buy.Keys.Count];
+			double[] quantitys = new double[buy.Keys.Count];
+			double[] prices = new double[buy.Keys.Count];
 			int i = 0;
-			foreach (KeyValuePair<int, double> p in sell)
+			foreach (KeyValuePair<int, double> p in buy)
 			{
 				ids[i] = p.Key;
 				quantitys[i] = p.Value;
@@ -213,12 +201,12 @@ namespace inventario
 				i++;
 			}
 			db.sell(ids, quantitys, userId, prices);
-			sell.Clear();
-			dgvSell.Rows.Clear();
+			buy.Clear();
+			dgvBuy.Rows.Clear();
 			loadProducts();
 			loadAutocomplete();
 			lbTotal.Text = "Total: $0";
-			sellTotal = 0;
+			buyTotal = 0;
 			MessageBox.Show("Compra Exitosa");
 		}
 	}
