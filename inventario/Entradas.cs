@@ -64,36 +64,31 @@ namespace inventario
 			if(productNames.TryGetValue(tbProductName.Text,out id))//si el producto existe
 			{
 				Product product = getProductById(id);
-				if (product.Stock > 0)
+				if (buy.ContainsKey(product.Id))//si ya esta en el carrito
 				{
-					if (buy.ContainsKey(product.Id))//si ya esta en el carrito
+					buy[product.Id] += 1;
+					for (int i = 0; i < dgvBuy.Rows.Count; i++)
 					{
-						buy[product.Id] += 1;
-						for (int i = 0; i < dgvBuy.Rows.Count; i++)
+						if (Convert.ToInt32(dgvBuy.Rows[i].Cells[0].Value) == product.Id)
 						{
-							if (Convert.ToInt32(dgvBuy.Rows[i].Cells[0].Value) == product.Id)
-							{
-								dgvBuy.Rows[i].Cells[3].Value = buy[product.Id];
-								dgvBuy.Rows[i].Cells[5].Value = buy[product.Id] * product.Price;
-							}
+							dgvBuy.Rows[i].Cells[3].Value = buy[product.Id];
+							dgvBuy.Rows[i].Cells[5].Value = buy[product.Id] * product.BuyPrice;
 						}
 					}
-					else
-					{
-						buy.Add(product.Id, 1);
-						object[] values = new object[6];
-						values[0] = product.Id;
-						values[1] = product.Name;
-						values[2] = product.Unit;
-						values[3] = 1.0; //cantidad
-						values[4] = product.Price;
-						values[5] = product.Price;//Total
-						dgvBuy.Rows.Add(values);
-					}
-					updateTotal(product.Price, true);
 				}
 				else
-					MessageBox.Show("Producto sin Existencias");
+				{
+					buy.Add(product.Id, 1);
+					object[] values = new object[6];
+					values[0] = product.Id;
+					values[1] = product.Name;
+					values[2] = product.Unit;
+					values[3] = 1.0; //cantidad
+					values[4] = product.BuyPrice;
+					values[5] = product.BuyPrice;//Total
+					dgvBuy.Rows.Add(values);
+				}
+				updateTotal(product.BuyPrice, true);
 			}
 			tbProductName.Text = "";
 		}
@@ -123,14 +118,9 @@ namespace inventario
 					return;
 				}
 				Product p = getProductById(product_id);
-				if (quantity > p.Stock)
-				{
-					quantity = p.Stock;
-					dgvBuy.Rows[e.RowIndex].Cells[3].Value = quantity;
-				}
-				dgvBuy.Rows[e.RowIndex].Cells[5].Value = buy[p.Id] * p.Price;
-				updateTotal(p.Price * buy[product_id], false);
-				if (quantity < 1)
+				dgvBuy.Rows[e.RowIndex].Cells[5].Value = buy[p.Id] * p.BuyPrice;
+				updateTotal(p.BuyPrice * buy[product_id], false);
+				if (quantity <= 0)
 				{
 					buy.Remove(product_id);
 					dgvBuy.Rows.RemoveAt(e.RowIndex);
@@ -138,9 +128,29 @@ namespace inventario
 				else
 				{
 					buy[product_id] = quantity;
-					updateTotal(p.Price * buy[product_id], true);
-					dgvBuy.Rows[e.RowIndex].Cells[5].Value = buy[p.Id] * p.Price;
+					updateTotal(p.BuyPrice * buy[product_id], true);
+					dgvBuy.Rows[e.RowIndex].Cells[5].Value = buy[p.Id] * p.BuyPrice;
 				}
+			}
+
+			if(e.ColumnIndex == 4)
+			{
+				int product_id = (int)dgvBuy.Rows[e.RowIndex].Cells[0].Value;
+				double newPrice = 0;
+				Product p = getProductById(product_id);
+				try
+				{
+					newPrice = Convert.ToDouble(dgvBuy.Rows[e.RowIndex].Cells[4].Value);
+				}
+				catch (Exception)
+				{
+					dgvBuy.Rows[e.RowIndex].Cells[4].Value = p.BuyPrice;//si no es un numero
+					return;
+				}
+				updateTotal(p.BuyPrice * buy[product_id], false);
+				p.BuyPrice = newPrice;
+				dgvBuy.Rows[e.RowIndex].Cells[5].Value = buy[p.Id] * p.BuyPrice;
+				updateTotal(p.BuyPrice * buy[product_id], true);
 			}
 		}
 
@@ -176,7 +186,7 @@ namespace inventario
 		{
 			int product_id = (int)e.Row.Cells[0].Value;
 			Product p = getProductById(product_id);
-			updateTotal(p.Price * buy[product_id], false);
+			updateTotal(p.BuyPrice * buy[product_id], false);
 			buy.Remove(product_id);
 		}
 
@@ -197,10 +207,11 @@ namespace inventario
 				ids[i] = p.Key;
 				quantitys[i] = p.Value;
 				Product prod = getProductById(p.Key);
-				prices[i] = prod.Price;
+				prices[i] = prod.BuyPrice;
+				db.updateBuyPrice(ids[i], prices[i]);
 				i++;
 			}
-			db.sell(ids, quantitys, userId, prices);
+			db.buy(ids, quantitys, userId, prices);
 			buy.Clear();
 			dgvBuy.Rows.Clear();
 			loadProducts();

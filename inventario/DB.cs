@@ -48,7 +48,7 @@ namespace inventario
 				command = new SQLiteCommand(query, connection);
 				command.ExecuteNonQuery();
 			}
-			catch (SQLiteException e) { }
+			catch (SQLiteException) { }
 			/*query = Query.FILL_TEST_DATA;
 			command = new SQLiteCommand(query, connection);
 			command.ExecuteNonQuery();*/
@@ -94,7 +94,8 @@ namespace inventario
 						(string)reader["type"],
 						Convert.ToInt32(reader["minimum_stock"]),
 						Convert.ToInt32(reader["current_stock"]),
-						(double)reader["price"]
+						(double)reader["price"],
+						(double)reader["buy_price"]
 						);
 					products.Add(newProduct);
 			}
@@ -133,10 +134,36 @@ namespace inventario
 				query = Query.Buy(product[i], quantity[i], user, price[i]);
 				command = new SQLiteCommand(query, connection);
 				command.ExecuteNonQuery();
-				query = Query.UpdateStock(product[i], quantity[i], false);
+				query = Query.UpdateStock(product[i], quantity[i], true);
 				command = new SQLiteCommand(query, connection);
 				command.ExecuteNonQuery();
 			}
+			transaction.Commit();
+			connection.Close();
+		}
+
+		public void updatePrice(int product, double newPrice)
+		{
+			string query;
+			SQLiteCommand command;
+			connection.Open();
+			SQLiteTransaction transaction = connection.BeginTransaction();
+			query = Query.UpdatePrice(product, newPrice);
+			command = new SQLiteCommand(query, connection);
+			command.ExecuteNonQuery();
+			transaction.Commit();
+			connection.Close();
+		}
+
+		public void updateBuyPrice(int product, double newPrice)
+		{
+			string query;
+			SQLiteCommand command;
+			connection.Open();
+			SQLiteTransaction transaction = connection.BeginTransaction();
+			query = Query.UpdateBuyPrice(product, newPrice);
+			command = new SQLiteCommand(query, connection);
+			command.ExecuteNonQuery();
 			transaction.Commit();
 			connection.Close();
 		}

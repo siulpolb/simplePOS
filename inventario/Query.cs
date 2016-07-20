@@ -11,7 +11,7 @@ namespace inventario
 		#region CREATE_TABLES
 
 		public static string CREATE_TABLE_TYPES = "CREATE TABLE IF NOT EXISTS types (type_id INTEGER PRIMARY KEY, name VARCHAR(50))";
-		public static string CREATE_TABLE_PRODUCTS = "CREATE TABLE IF NOT EXISTS products (product_id INTEGER PRIMARY KEY, item VARCHAR(100), unit VARCHAR(10), type INT, minimum_stock FLOAT, current_stock FLOAT, price FLOAT, active BOOLEAN, FOREIGN KEY(type) REFERENCES types(type_id))";
+		public static string CREATE_TABLE_PRODUCTS = "CREATE TABLE IF NOT EXISTS products (product_id INTEGER PRIMARY KEY, item VARCHAR(100), unit VARCHAR(10), type INT, minimum_stock FLOAT, current_stock FLOAT, price FLOAT, buy_price FLOAT,active BOOLEAN, FOREIGN KEY(type) REFERENCES types(type_id))";
 		public static string CREATE_TABLE_USERS = "CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY, username VARCHAR(10) UNIQUE, password VARCHAR(100), level INT, active INT)";
 		public static string CREATE_TABLE_SALES = "CREATE TABLE IF NOT EXISTS sales (date DATE, time TIME, product INT, user INT, quantity FLOAT, price FLOAT)";
 		public static string CREATE_TABLE_INCOMES = "CREATE TABLE IF NOT EXISTS incomes (date DATE, time TIME, product INT, user INT,  quantity FLOAT, price FLOAT)";
@@ -20,7 +20,7 @@ namespace inventario
 
 		public static string INSERT_SUPER_USER = "INSERT INTO users VALUES (NULL, 'admin', 'admin', 0,1)";
 
-		public static string GET_ALL_PRODUCTS = "SELECT product_id, item, unit, types.name as type, minimum_stock, current_stock, price FROM products, types WHERE products.type = types.type_id AND products.active = 1";
+		public static string GET_ALL_PRODUCTS = "SELECT product_id, item, unit, types.name as type, minimum_stock, current_stock, price, buy_price FROM products, types WHERE products.type = types.type_id AND products.active = 1";
 
 		#region FUNCTIONS
 
@@ -36,7 +36,7 @@ namespace inventario
 
 		public static string Buy(int product, double quantity, int user, double price)
 		{
-			return "INSERT INTO sales VALUES (date('now'),time('now')," + product + "," + user + "," + quantity + "," + price + ")";
+			return "INSERT INTO incomes VALUES (date('now'),time('now')," + product + "," + user + "," + quantity + "," + price + ")";
 		}
 
 		public static string UpdateStock(int product, double quantity, bool increase)
@@ -47,9 +47,19 @@ namespace inventario
 			return query;
 		}
 
+		public static string UpdatePrice(int product, double newPrice)
+		{
+			return "UPDATE products SET price = " + newPrice + " WHERE product_id = " + product;
+		}
+
+		public static string UpdateBuyPrice(int product, double newPrice)
+		{
+			return "UPDATE products SET buy_price = " + newPrice + " WHERE product_id = " + product;
+		}
+
 		#endregion
 
-		public static string FILL_TEST_DATA = "INSERT INTO types VALUES(NULL, 'Refrescos');INSERT INTO types VALUES(NULL, 'Salchichoneria');INSERT INTO products VALUES (NULL,'Coca Cola 10 ml', 'pieza',1,5,10,10,1);INSERT INTO products VALUES (NULL,'Rajas 10 gr', 'pieza',1,5,10,5.5,1);";
+		public static string FILL_TEST_DATA = "INSERT INTO types VALUES(NULL, 'Refrescos');INSERT INTO types VALUES(NULL, 'Salchichoneria');INSERT INTO products VALUES (NULL,'Coca Cola 10 ml', 'pieza',1,5,10,10,8,1);INSERT INTO products VALUES (NULL,'Rajas 10 gr', 'pieza',1,5,10,5.5,3.5,1);";
 
 	}
 }

@@ -33,10 +33,11 @@ namespace inventario
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			//login();
+			login();
 			loadProducts();
 			loadAutocomplete();
 			checkPermissions();
+			Console.WriteLine(DateTime.UtcNow.ToShortTimeString());
 		}
 
 		private void login()
@@ -142,7 +143,7 @@ namespace inventario
 				}
 				dgvSell.Rows[e.RowIndex].Cells[5].Value = sell[p.Id] * p.Price;
 				updateTotal(p.Price * sell[product_id], false);
-				if (quantity < 1)
+				if (quantity <= 0)
 				{
 					sell.Remove(product_id);
 					dgvSell.Rows.RemoveAt(e.RowIndex);
