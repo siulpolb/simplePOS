@@ -12,18 +12,17 @@ namespace inventario
 {
 	public partial class Entradas : Form
 	{
+		private User user;
 		private DB db;
-		private string username;
-		private int userId;
-		private int userLevel;
 		private Dictionary<string, int> productNames;
 		private List<Product> products;
 		private Dictionary<int, double> buy;//id,cantidad
 		private double buyTotal;
 
-		public Entradas(DB db)
+		public Entradas(DB db, User user)
 		{
 			InitializeComponent();
+			this.user = user;
 			this.db = db;
 			productNames = new Dictionary<string, int>();
 			products = new List<Product>();
@@ -176,7 +175,7 @@ namespace inventario
 
 		private void checkPermissions()
 		{
-			if(userLevel != 0)
+			if(user.UserLevel != 0)
 			{
 				tsmiAdmin.Enabled = false;
 			}
@@ -211,7 +210,7 @@ namespace inventario
 				db.updateBuyPrice(ids[i], prices[i]);
 				i++;
 			}
-			db.buy(ids, quantitys, userId, prices);
+			db.buy(ids, quantitys, user.UserId, prices);
 			buy.Clear();
 			dgvBuy.Rows.Clear();
 			loadProducts();

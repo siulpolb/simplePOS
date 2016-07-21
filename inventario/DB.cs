@@ -41,6 +41,9 @@ namespace inventario
 			query = Query.CREATE_TABLE_INCOMES;
 			command = new SQLiteCommand(query, connection);
 			command.ExecuteNonQuery();
+			query = Query.CREATE_TABLE_LOG;
+			command = new SQLiteCommand(query, connection);
+			command.ExecuteNonQuery();
 			transaction.Commit();
 			try
 			{
@@ -55,12 +58,10 @@ namespace inventario
 			connection.Close();
 		}
 
-		public int[] login(string user, string password)
+		public User login(string user, string password)
 		{
 			string query;
-			int[] userData = new int[2];
-			userData[0] = -1;
-			userData[1] = -1;
+			User loguedUser = new User(-1, user, -1);
 			SQLiteCommand command;
 			connection.Open();
 			query = Query.Login(user,password);
@@ -68,12 +69,12 @@ namespace inventario
 			SQLiteDataReader reader = command.ExecuteReader();
 			while (reader.Read())
 			{
-				userData[0] = Convert.ToInt32(reader["user_id"]);
-				userData[1] = Convert.ToInt32(reader["level"]);
+				loguedUser.UserId = Convert.ToInt32(reader["user_id"]);
+				loguedUser.UserLevel = Convert.ToInt32(reader["level"]);
 			}
 			reader.Close();
 			connection.Close();
-			return userData;
+			return loguedUser;
 		}
 
 		public List<Product> getAllProducts()

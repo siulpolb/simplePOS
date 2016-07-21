@@ -13,9 +13,7 @@ namespace inventario
 	public partial class Form1 : Form
 	{
 		private DB db;
-		private string username;
-		private int userId;
-		private int userLevel;
+		private User user;
 		private Dictionary<string, int> productNames;
 		private List<Product> products;
 		private Dictionary<int, double> sell;//id,cantidad
@@ -37,7 +35,6 @@ namespace inventario
 			loadProducts();
 			loadAutocomplete();
 			checkPermissions();
-			Console.WriteLine(DateTime.UtcNow.ToShortTimeString());
 		}
 
 		private void login()
@@ -46,9 +43,7 @@ namespace inventario
 			var result = login.ShowDialog();
 			if (login.DialogResult != DialogResult.OK)
 				this.Close();
-			username = login.Username;
-			userId = login.UserId;
-			userLevel = login.UserLevel;
+			user = login.User;
 		}
 
 		private void loadAutocomplete()
@@ -191,7 +186,7 @@ namespace inventario
 				prices[i] = prod.Price;
 				i++;
 			}
-			db.sell(ids,quantitys,userId,prices);
+			db.sell(ids,quantitys,user.UserId,prices);
 			sell.Clear();
 			dgvSell.Rows.Clear();
 			loadProducts();
@@ -208,7 +203,7 @@ namespace inventario
 
 		private void checkPermissions()
 		{
-			if(userLevel != 0)
+			if(user.UserLevel != 0)
 			{
 				tsmiAdmin.Enabled = false;
 			}
@@ -230,7 +225,7 @@ namespace inventario
 
 		private void tsmiIncomings_Click(object sender, EventArgs e)
 		{
-			Entradas entrada = new Entradas(db);
+			Entradas entrada = new Entradas(db,user);
 			entrada.ShowDialog();
 			loadProducts();
 			loadAutocomplete();

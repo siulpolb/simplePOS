@@ -15,6 +15,7 @@ namespace inventario
 		public static string CREATE_TABLE_USERS = "CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY, username VARCHAR(10) UNIQUE, password VARCHAR(100), level INT, active INT)";
 		public static string CREATE_TABLE_SALES = "CREATE TABLE IF NOT EXISTS sales (date DATE, time TIME, product INT, user INT, quantity FLOAT, price FLOAT)";
 		public static string CREATE_TABLE_INCOMES = "CREATE TABLE IF NOT EXISTS incomes (date DATE, time TIME, product INT, user INT,  quantity FLOAT, price FLOAT)";
+		public static string CREATE_TABLE_LOG = "CREATE TABLE IF NOT EXISTS log (date DATE, time TIME, user INT, log TEXT)";
 
 		#endregion
 
