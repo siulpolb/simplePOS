@@ -1,6 +1,6 @@
 ﻿namespace inventario
 {
-	partial class Resgistar
+	partial class Registrar
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -98,11 +98,13 @@
 			// 
 			// cbType
 			// 
+			this.cbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cbType.FormattingEnabled = true;
 			this.cbType.Location = new System.Drawing.Point(89, 128);
 			this.cbType.Name = "cbType";
 			this.cbType.Size = new System.Drawing.Size(194, 21);
 			this.cbType.TabIndex = 7;
+			this.cbType.SelectedValueChanged += new System.EventHandler(this.cbType_SelectedValueChanged);
 			// 
 			// btnAdd
 			// 
@@ -114,7 +116,7 @@
 			this.btnAdd.UseVisualStyleBackColor = true;
 			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
 			// 
-			// Resgistar
+			// Registrar
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -128,7 +130,7 @@
 			this.Controls.Add(this.label2);
 			this.Controls.Add(this.label1);
 			this.Controls.Add(this.tbName);
-			this.Name = "Resgistar";
+			this.Name = "Registrar";
 			this.Text = "Nuevo Producto";
 			this.ResumeLayout(false);
 			this.PerformLayout();

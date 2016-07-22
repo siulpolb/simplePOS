@@ -31,7 +31,9 @@ namespace inventario
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			login();
+			//login();
+			Registrar r = new Registrar(db,user);
+			r.ShowDialog();
 			loadProducts();
 			loadAutocomplete();
 			checkPermissions();

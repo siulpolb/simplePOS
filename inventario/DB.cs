@@ -169,6 +169,22 @@ namespace inventario
 			connection.Close();
 		}
 
+		public List<Type> getTypes()
+		{
+			List<Type> types = new List<Type>();
+			string query = Query.GET_TYPES;
+			SQLiteCommand command;
+			connection.Open();
+			command = new SQLiteCommand(query, connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			while (reader.Read())
+			{
+				types.Add(new Type() { Id = Convert.ToInt32(reader["type_id"]), Name = Convert.ToString(reader["name"]) });
+			}
+			reader.Close();
+			connection.Close();
+			return types;
+		}
 
 	}
 }

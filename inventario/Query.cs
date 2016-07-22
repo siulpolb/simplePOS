@@ -22,6 +22,7 @@ namespace inventario
 		public static string INSERT_SUPER_USER = "INSERT INTO users VALUES (NULL, 'admin', 'admin', 0,1)";
 
 		public static string GET_ALL_PRODUCTS = "SELECT product_id, item, unit, types.name as type, minimum_stock, current_stock, price, buy_price FROM products, types WHERE products.type = types.type_id AND products.active = 1";
+		public static string GET_TYPES = "SELECT type_id, name from types";
 
 		#region FUNCTIONS
 

@@ -81,12 +81,13 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query.cs" />
-    <Compile Include="Resgistar.cs">
+    <Compile Include="Registrar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Resgistar.Designer.cs">
-      <DependentUpon>Resgistar.cs</DependentUpon>
+    <Compile Include="Registrar.Designer.cs">
+      <DependentUpon>Registrar.cs</DependentUpon>
     </Compile>
+    <Compile Include="Type.cs" />
     <Compile Include="User.cs" />
     <EmbeddedResource Include="Entradas.resx">
       <DependentUpon>Entradas.cs</DependentUpon>
@@ -109,8 +110,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Resgistar.resx">
-      <DependentUpon>Resgistar.cs</DependentUpon>
+    <EmbeddedResource Include="Registrar.resx">
+      <DependentUpon>Registrar.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
