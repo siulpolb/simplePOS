@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace inventario
 {
-	public partial class Form1 : Form
+	public partial class Ventas : Form
 	{
 		private DB db;
 		private User user;
@@ -19,7 +19,7 @@ namespace inventario
 		private Dictionary<int, double> sell;//id,cantidad
 		private double sellTotal;
 
-		public Form1()
+		public Ventas()
 		{
 			InitializeComponent();
 			db = new DB();

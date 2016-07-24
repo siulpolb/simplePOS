@@ -1,6 +1,6 @@
 ﻿namespace inventario
 {
-    partial class Form1
+    partial class Ventas
     {
         /// <summary>
         /// Variable del diseñador necesaria.
