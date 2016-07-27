@@ -37,6 +37,10 @@
 			this.label4 = new System.Windows.Forms.Label();
 			this.cbType = new System.Windows.Forms.ComboBox();
 			this.btnAdd = new System.Windows.Forms.Button();
+			this.tbBuyPrice = new System.Windows.Forms.TextBox();
+			this.label5 = new System.Windows.Forms.Label();
+			this.tnSellPrice = new System.Windows.Forms.TextBox();
+			this.label6 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
 			// tbName
@@ -90,7 +94,7 @@
 			// label4
 			// 
 			this.label4.AutoSize = true;
-			this.label4.Location = new System.Drawing.Point(48, 131);
+			this.label4.Location = new System.Drawing.Point(48, 208);
 			this.label4.Name = "label4";
 			this.label4.Size = new System.Drawing.Size(28, 13);
 			this.label4.TabIndex = 6;
@@ -100,27 +104,62 @@
 			// 
 			this.cbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
 			this.cbType.FormattingEnabled = true;
-			this.cbType.Location = new System.Drawing.Point(89, 128);
+			this.cbType.Location = new System.Drawing.Point(89, 205);
 			this.cbType.Name = "cbType";
 			this.cbType.Size = new System.Drawing.Size(194, 21);
-			this.cbType.TabIndex = 7;
-			this.cbType.SelectedValueChanged += new System.EventHandler(this.cbType_SelectedValueChanged);
+			this.cbType.TabIndex = 10;
 			// 
 			// btnAdd
 			// 
-			this.btnAdd.Location = new System.Drawing.Point(112, 177);
+			this.btnAdd.Location = new System.Drawing.Point(147, 251);
 			this.btnAdd.Name = "btnAdd";
 			this.btnAdd.Size = new System.Drawing.Size(75, 23);
-			this.btnAdd.TabIndex = 8;
+			this.btnAdd.TabIndex = 12;
 			this.btnAdd.Text = "Agregar";
 			this.btnAdd.UseVisualStyleBackColor = true;
 			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+			// 
+			// tbBuyPrice
+			// 
+			this.tbBuyPrice.Location = new System.Drawing.Point(89, 128);
+			this.tbBuyPrice.Name = "tbBuyPrice";
+			this.tbBuyPrice.Size = new System.Drawing.Size(194, 20);
+			this.tbBuyPrice.TabIndex = 7;
+			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(7, 131);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(76, 13);
+			this.label5.TabIndex = 9;
+			this.label5.Text = "Precio Compra";
+			// 
+			// tnSellPrice
+			// 
+			this.tnSellPrice.Location = new System.Drawing.Point(89, 164);
+			this.tnSellPrice.Name = "tnSellPrice";
+			this.tnSellPrice.Size = new System.Drawing.Size(194, 20);
+			this.tnSellPrice.TabIndex = 8;
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Location = new System.Drawing.Point(15, 167);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(68, 13);
+			this.label6.TabIndex = 11;
+			this.label6.Text = "Precio Venta";
 			// 
 			// Registrar
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(304, 244);
+			this.ClientSize = new System.Drawing.Size(304, 289);
+			this.Controls.Add(this.tnSellPrice);
+			this.Controls.Add(this.label6);
+			this.Controls.Add(this.tbBuyPrice);
+			this.Controls.Add(this.label5);
 			this.Controls.Add(this.btnAdd);
 			this.Controls.Add(this.cbType);
 			this.Controls.Add(this.label4);
@@ -148,5 +187,9 @@
 		private System.Windows.Forms.Label label4;
 		private System.Windows.Forms.ComboBox cbType;
 		private System.Windows.Forms.Button btnAdd;
+		private System.Windows.Forms.TextBox tbBuyPrice;
+		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.TextBox tnSellPrice;
+		private System.Windows.Forms.Label label6;
 	}
 }

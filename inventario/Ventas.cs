@@ -19,10 +19,11 @@ namespace inventario
 		private Dictionary<int, double> sell;//id,cantidad
 		private double sellTotal;
 
-		public Ventas()
+		public Ventas(DB db, User user)
 		{
 			InitializeComponent();
-			db = new DB();
+			this.db = db;
+			this.user = user;
 			productNames = new Dictionary<string, int>();
 			products = new List<Product>();
 			sell = new Dictionary<int, double>();
@@ -31,22 +32,10 @@ namespace inventario
 
 		private void Form1_Load(object sender, EventArgs e)
 		{
-			//login();
-			Registrar r = new Registrar(db,user);
-			r.ShowDialog();
 			loadProducts();
 			loadAutocomplete();
-			checkPermissions();
 		}
 
-		private void login()
-		{
-			Login login = new Login(db);
-			var result = login.ShowDialog();
-			if (login.DialogResult != DialogResult.OK)
-				this.Close();
-			user = login.User;
-		}
 
 		private void loadAutocomplete()
 		{
@@ -198,39 +187,12 @@ namespace inventario
 			MessageBox.Show("Venta Exitosa");
 		}
 
-		private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			Application.Restart();
-		}
-
-		private void checkPermissions()
-		{
-			if(user.UserLevel != 0)
-			{
-				tsmiAdmin.Enabled = false;
-			}
-		}
-
 		private void dgvSell_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)
 		{
 			int product_id = (int)e.Row.Cells[0].Value;
 			Product p = getProductById(product_id);
 			updateTotal(p.Price * sell[product_id], false);
 			sell.Remove(product_id);
-		}
-
-		private void tsmiList_Click(object sender, EventArgs e)
-		{
-			List list = new List(db);
-			list.ShowDialog();
-		}
-
-		private void tsmiIncomings_Click(object sender, EventArgs e)
-		{
-			Entradas entrada = new Entradas(db,user);
-			entrada.ShowDialog();
-			loadProducts();
-			loadAutocomplete();
 		}
 	}
 }

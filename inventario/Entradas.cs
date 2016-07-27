@@ -34,7 +34,6 @@ namespace inventario
 		{
 			loadProducts();
 			loadAutocomplete();
-			checkPermissions();
 		}
 
 		private void loadAutocomplete()
@@ -171,14 +170,6 @@ namespace inventario
 					break;
 				}
 			return product;
-		}
-
-		private void checkPermissions()
-		{
-			if(user.UserLevel != 0)
-			{
-				tsmiAdmin.Enabled = false;
-			}
 		}
 
 		private void dgvSell_UserDeletingRow(object sender, DataGridViewRowCancelEventArgs e)

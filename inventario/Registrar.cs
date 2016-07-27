@@ -28,14 +28,8 @@ namespace inventario
 
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
-			
-		}
-
-		private void cbType_SelectedValueChanged(object sender, EventArgs e)
-		{
 			Console.WriteLine("Valor: " + cbType.SelectedValue);
-			Console.WriteLine("Texto: " + cbType.SelectedText);
-			Console.WriteLine(cbType.SelectedItem);
+			Console.WriteLine("Texto: " + cbType.Text);
 		}
 	}
 }

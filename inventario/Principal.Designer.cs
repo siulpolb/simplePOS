@@ -35,7 +35,7 @@
 			this.btnIncidentes = new System.Windows.Forms.Button();
 			this.btnUsuarios = new System.Windows.Forms.Button();
 			this.button7 = new System.Windows.Forms.Button();
-			this.button8 = new System.Windows.Forms.Button();
+			this.btnNuevoProducto = new System.Windows.Forms.Button();
 			this.btnCerrarSesion = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
@@ -109,15 +109,15 @@
 			this.button7.UseVisualStyleBackColor = true;
 			this.button7.Click += new System.EventHandler(this.button7_Click);
 			// 
-			// button8
+			// btnNuevoProducto
 			// 
-			this.button8.Location = new System.Drawing.Point(208, 273);
-			this.button8.Name = "button8";
-			this.button8.Size = new System.Drawing.Size(110, 82);
-			this.button8.TabIndex = 7;
-			this.button8.Text = "Reportes";
-			this.button8.UseVisualStyleBackColor = true;
-			this.button8.Click += new System.EventHandler(this.button8_Click);
+			this.btnNuevoProducto.Location = new System.Drawing.Point(208, 273);
+			this.btnNuevoProducto.Name = "btnNuevoProducto";
+			this.btnNuevoProducto.Size = new System.Drawing.Size(110, 82);
+			this.btnNuevoProducto.TabIndex = 7;
+			this.btnNuevoProducto.Text = "Nuevo Producto";
+			this.btnNuevoProducto.UseVisualStyleBackColor = true;
+			this.btnNuevoProducto.Click += new System.EventHandler(this.button8_Click);
 			// 
 			// btnCerrarSesion
 			// 
@@ -135,7 +135,7 @@
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(518, 367);
 			this.Controls.Add(this.btnCerrarSesion);
-			this.Controls.Add(this.button8);
+			this.Controls.Add(this.btnNuevoProducto);
 			this.Controls.Add(this.button7);
 			this.Controls.Add(this.btnUsuarios);
 			this.Controls.Add(this.btnIncidentes);
@@ -161,7 +161,7 @@
 		private System.Windows.Forms.Button btnIncidentes;
 		private System.Windows.Forms.Button btnUsuarios;
 		private System.Windows.Forms.Button button7;
-		private System.Windows.Forms.Button button8;
+		private System.Windows.Forms.Button btnNuevoProducto;
 		private System.Windows.Forms.Button btnCerrarSesion;
 	}
 }
