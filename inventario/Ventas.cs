@@ -36,7 +36,6 @@ namespace inventario
 			loadAutocomplete();
 		}
 
-
 		private void loadAutocomplete()
 		{
 			var source = new AutoCompleteStringCollection();

@@ -34,7 +34,7 @@
 			this.btnReportes = new System.Windows.Forms.Button();
 			this.btnIncidentes = new System.Windows.Forms.Button();
 			this.btnUsuarios = new System.Windows.Forms.Button();
-			this.button7 = new System.Windows.Forms.Button();
+			this.btnReportarIncidente = new System.Windows.Forms.Button();
 			this.btnNuevoProducto = new System.Windows.Forms.Button();
 			this.btnCerrarSesion = new System.Windows.Forms.Button();
 			this.SuspendLayout();
@@ -99,15 +99,15 @@
 			this.btnUsuarios.UseVisualStyleBackColor = true;
 			this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
 			// 
-			// button7
+			// btnReportarIncidente
 			// 
-			this.button7.Location = new System.Drawing.Point(12, 273);
-			this.button7.Name = "button7";
-			this.button7.Size = new System.Drawing.Size(110, 82);
-			this.button7.TabIndex = 6;
-			this.button7.Text = "Reportes";
-			this.button7.UseVisualStyleBackColor = true;
-			this.button7.Click += new System.EventHandler(this.button7_Click);
+			this.btnReportarIncidente.Location = new System.Drawing.Point(12, 273);
+			this.btnReportarIncidente.Name = "btnReportarIncidente";
+			this.btnReportarIncidente.Size = new System.Drawing.Size(110, 82);
+			this.btnReportarIncidente.TabIndex = 6;
+			this.btnReportarIncidente.Text = "Reportar Incidente";
+			this.btnReportarIncidente.UseVisualStyleBackColor = true;
+			this.btnReportarIncidente.Click += new System.EventHandler(this.button7_Click);
 			// 
 			// btnNuevoProducto
 			// 
@@ -136,7 +136,7 @@
 			this.ClientSize = new System.Drawing.Size(518, 367);
 			this.Controls.Add(this.btnCerrarSesion);
 			this.Controls.Add(this.btnNuevoProducto);
-			this.Controls.Add(this.button7);
+			this.Controls.Add(this.btnReportarIncidente);
 			this.Controls.Add(this.btnUsuarios);
 			this.Controls.Add(this.btnIncidentes);
 			this.Controls.Add(this.btnReportes);
@@ -160,7 +160,7 @@
 		private System.Windows.Forms.Button btnReportes;
 		private System.Windows.Forms.Button btnIncidentes;
 		private System.Windows.Forms.Button btnUsuarios;
-		private System.Windows.Forms.Button button7;
+		private System.Windows.Forms.Button btnReportarIncidente;
 		private System.Windows.Forms.Button btnNuevoProducto;
 		private System.Windows.Forms.Button btnCerrarSesion;
 	}

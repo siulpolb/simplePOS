@@ -59,6 +59,18 @@
     <Compile Include="Entradas.designer.cs">
       <DependentUpon>Entradas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Incidents.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Incidents.Designer.cs">
+      <DependentUpon>Incidents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InputMessage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InputMessage.Designer.cs">
+      <DependentUpon>InputMessage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,6 +109,12 @@
     <Compile Include="User.cs" />
     <EmbeddedResource Include="Entradas.resx">
       <DependentUpon>Entradas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Incidents.resx">
+      <DependentUpon>Incidents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InputMessage.resx">
+      <DependentUpon>InputMessage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas.resx">
       <DependentUpon>Ventas.cs</DependentUpon>

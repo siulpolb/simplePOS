@@ -186,5 +186,52 @@ namespace inventario
 			return types;
 		}
 
+		public void newProduct(string name, string unit, double minimum, int type, double sellPrice, double buyPrice)
+		{
+			string query;
+			SQLiteCommand command;
+			connection.Open();
+			SQLiteTransaction transaction = connection.BeginTransaction();
+			query = Query.NewProduct(name,unit,minimum,type,sellPrice,buyPrice);
+			command = new SQLiteCommand(query, connection);
+			command.ExecuteNonQuery();
+			transaction.Commit();
+			connection.Close();
+		}
+
+		public int newType(string name)
+		{
+			string query;
+			int newType = -1;
+			SQLiteCommand command;
+			connection.Open();
+			SQLiteTransaction transaction = connection.BeginTransaction();
+			query = Query.NewType(name);
+			command = new SQLiteCommand(query, connection);
+			command.ExecuteNonQuery();
+			query = Query.GetTypeByName(name);
+			command = new SQLiteCommand(query, connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			while (reader.Read())
+				newType = Convert.ToInt32(reader["type_id"]);
+			reader.Close();
+			transaction.Commit();
+			connection.Close();
+			return newType;
+		}
+
+		public void newLog(int user, string text)
+		{
+			string query;
+			SQLiteCommand command;
+			connection.Open();
+			SQLiteTransaction transaction = connection.BeginTransaction();
+			query = Query.NewLog(user,text);
+			command = new SQLiteCommand(query, connection);
+			command.ExecuteNonQuery();
+			transaction.Commit();
+			connection.Close();
+		}
+
 	}
 }

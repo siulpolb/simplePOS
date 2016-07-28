@@ -59,9 +59,24 @@ namespace inventario
 			return "UPDATE products SET buy_price = " + newPrice + " WHERE product_id = " + product;
 		}
 
-		public static string NewProduct(string name, string unit, int minimum, int type, double sellPrice, double buyPrice)
+		public static string NewProduct(string name, string unit, double minimum, int type, double sellPrice, double buyPrice)
 		{
 			return "INSERT INTO products VALUES(NULL, '"+name+"', '"+unit+"',"+type+","+minimum+",0,"+sellPrice+","+buyPrice+",1)";
+		}
+
+		public static string NewType(string name)
+		{
+			return "INSERT INTO types VALUES(NULL,'"+name+"')";
+		}
+
+		public static string GetTypeByName(string name)
+		{
+			return "SELECT type_id FROM types WHERE name = '"+name+"'";
+		}
+
+		public static string NewLog(int user, string text)
+		{
+			return "INSERT INTO log VALUES (date('now'),time('now'),"+user+",'"+text+"')";
 		}
 
 		#endregion

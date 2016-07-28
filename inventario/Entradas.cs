@@ -131,8 +131,12 @@ namespace inventario
 				}
 			}
 
-			if(e.ColumnIndex == 4)
+			if (e.ColumnIndex == 4)
 			{
+				InputMessage m = new InputMessage("Motivo", "Describa el motivo del cambio de precio");
+				m.ShowDialog();
+				string log = "Cambio de precio de " + dgvBuy.Rows[e.RowIndex].Cells[1].Value.ToString() + " Motivo: " + m.Message;
+				db.newLog(user.UserId, log);
 				int product_id = (int)dgvBuy.Rows[e.RowIndex].Cells[0].Value;
 				double newPrice = 0;
 				Product p = getProductById(product_id);

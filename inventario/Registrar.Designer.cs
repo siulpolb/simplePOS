@@ -39,7 +39,7 @@
 			this.btnAdd = new System.Windows.Forms.Button();
 			this.tbBuyPrice = new System.Windows.Forms.TextBox();
 			this.label5 = new System.Windows.Forms.Label();
-			this.tnSellPrice = new System.Windows.Forms.TextBox();
+			this.tbSellPrice = new System.Windows.Forms.TextBox();
 			this.label6 = new System.Windows.Forms.Label();
 			this.SuspendLayout();
 			// 
@@ -111,7 +111,7 @@
 			// 
 			// btnAdd
 			// 
-			this.btnAdd.Location = new System.Drawing.Point(147, 251);
+			this.btnAdd.Location = new System.Drawing.Point(114, 254);
 			this.btnAdd.Name = "btnAdd";
 			this.btnAdd.Size = new System.Drawing.Size(75, 23);
 			this.btnAdd.TabIndex = 12;
@@ -135,12 +135,12 @@
 			this.label5.TabIndex = 9;
 			this.label5.Text = "Precio Compra";
 			// 
-			// tnSellPrice
+			// tbSellPrice
 			// 
-			this.tnSellPrice.Location = new System.Drawing.Point(89, 164);
-			this.tnSellPrice.Name = "tnSellPrice";
-			this.tnSellPrice.Size = new System.Drawing.Size(194, 20);
-			this.tnSellPrice.TabIndex = 8;
+			this.tbSellPrice.Location = new System.Drawing.Point(89, 164);
+			this.tbSellPrice.Name = "tbSellPrice";
+			this.tbSellPrice.Size = new System.Drawing.Size(194, 20);
+			this.tbSellPrice.TabIndex = 8;
 			// 
 			// label6
 			// 
@@ -153,10 +153,11 @@
 			// 
 			// Registrar
 			// 
+			this.AcceptButton = this.btnAdd;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(304, 289);
-			this.Controls.Add(this.tnSellPrice);
+			this.Controls.Add(this.tbSellPrice);
 			this.Controls.Add(this.label6);
 			this.Controls.Add(this.tbBuyPrice);
 			this.Controls.Add(this.label5);
@@ -189,7 +190,7 @@
 		private System.Windows.Forms.Button btnAdd;
 		private System.Windows.Forms.TextBox tbBuyPrice;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.TextBox tnSellPrice;
+		private System.Windows.Forms.TextBox tbSellPrice;
 		private System.Windows.Forms.Label label6;
 	}
 }

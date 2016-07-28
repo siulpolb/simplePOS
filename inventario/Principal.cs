@@ -50,7 +50,7 @@ namespace inventario
 			if ((user.UserLevel & 64) != 64)
 				btnNuevoProducto.Enabled = false;
 			if ((user.UserLevel & 128) != 128)
-				button7.Enabled = false;
+				btnReportarIncidente.Enabled = false;
 		}
 
 		private void btnVentas_Click(object sender, EventArgs e)
@@ -84,7 +84,10 @@ namespace inventario
 
 		private void btnIncidentes_Click(object sender, EventArgs e)
 		{
-
+			this.Hide();
+			Incidents incidents = new Incidents(db);
+			incidents.ShowDialog();
+			this.Show();
 		}
 
 		private void btnUsuarios_Click(object sender, EventArgs e)
@@ -94,7 +97,9 @@ namespace inventario
 
 		private void button7_Click(object sender, EventArgs e)
 		{
-
+			InputMessage m = new InputMessage("Reportar Incidente", "Describa el incidente");
+			m.ShowDialog();
+			db.newLog(user.UserId, m.Message);
 		}
 
 		private void button8_Click(object sender, EventArgs e)
