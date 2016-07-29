@@ -13,11 +13,15 @@ namespace inventario
 	public partial class Incidents : Form
 	{
 		DB db;
+		List<Log> logs;
 
 		public Incidents(DB db)
 		{
 			InitializeComponent();
 			this.db = db;
+			logs = db.getAllLogs();
+			foreach(Log l in logs)
+				dgvIncidents.Rows.Add(l.toObjectArray());
 		}
 	}
 }

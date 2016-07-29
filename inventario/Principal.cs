@@ -79,7 +79,8 @@ namespace inventario
 
 		private void btnReportes_Click(object sender, EventArgs e)
 		{
-
+			Console.WriteLine(DateTime.Now.ToShortDateString());
+			Console.WriteLine(DateTime.Now.ToLongTimeString());
 		}
 
 		private void btnIncidentes_Click(object sender, EventArgs e)

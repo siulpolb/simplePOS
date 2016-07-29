@@ -233,5 +233,33 @@ namespace inventario
 			connection.Close();
 		}
 
+		public List<Log> getAllLogs()
+		{
+			List<Log> logs = new List<Log>();
+			string query = Query.GET_ALL_LOGS;
+			SQLiteCommand command;
+			connection.Open();
+			command = new SQLiteCommand(query, connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			while (reader.Read())
+			{
+				Console.WriteLine(reader["fecha"]);
+				Console.WriteLine(reader["fecha"].ToString());
+				logs.Add(new Log() {
+					User = reader["username"].ToString(),
+					Fecha = Convert.ToDateTime(reader["fecha"]),
+					Hora = Convert.ToDateTime(reader["hora"]),
+					Text = reader["log"].ToString()
+				});
+			}
+			reader.Close();
+			connection.Close();
+			return logs;
+		}
 	}
+
+		/*public void getLogsDates()
+		{
+		;
+		}*/
 }

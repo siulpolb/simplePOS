@@ -71,6 +71,7 @@
     <Compile Include="InputMessage.Designer.cs">
       <DependentUpon>InputMessage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Log.cs" />
     <Compile Include="Ventas.cs">
       <SubType>Form</SubType>
     </Compile>
