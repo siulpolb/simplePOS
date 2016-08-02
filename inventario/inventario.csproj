@@ -72,6 +72,12 @@
       <DependentUpon>InputMessage.cs</DependentUpon>
     </Compile>
     <Compile Include="Log.cs" />
+    <Compile Include="NewUsers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NewUsers.Designer.cs">
+      <DependentUpon>NewUsers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Ventas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -116,6 +122,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="InputMessage.resx">
       <DependentUpon>InputMessage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NewUsers.resx">
+      <DependentUpon>NewUsers.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Ventas.resx">
       <DependentUpon>Ventas.cs</DependentUpon>

@@ -20,8 +20,6 @@ namespace inventario
 		{
 			InitializeComponent();
 			db = new DB();
-			login();
-			checkPermissions();
 		}
 
 		private void login()
@@ -29,12 +27,14 @@ namespace inventario
 			Login login = new Login(db);
 			var result = login.ShowDialog();
 			if (login.DialogResult != DialogResult.OK)
-				this.Close();
+				Application.Exit();
 			user = login.User;
 		}
 
 		private void checkPermissions()
 		{
+			if (user == null)
+				user = new User(-1,"",0);
 			if ((user.UserLevel & 1) != 1)
 				btnVentas.Enabled = false;
 			if ((user.UserLevel & 2) != 2)
@@ -93,7 +93,10 @@ namespace inventario
 
 		private void btnUsuarios_Click(object sender, EventArgs e)
 		{
-
+			this.Hide();
+			NewUsers users = new NewUsers(db);
+			users.ShowDialog();
+			this.Show();
 		}
 
 		private void button7_Click(object sender, EventArgs e)
@@ -114,6 +117,12 @@ namespace inventario
 		private void btnCerrarSesion_Click(object sender, EventArgs e)
 		{
 			Application.Restart();
+		}
+
+		private void Principal_Load(object sender, EventArgs e)
+		{
+			login();
+			checkPermissions();
 		}
 	}
 }

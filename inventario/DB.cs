@@ -243,12 +243,10 @@ namespace inventario
 			SQLiteDataReader reader = command.ExecuteReader();
 			while (reader.Read())
 			{
-				Console.WriteLine(reader["fecha"]);
-				Console.WriteLine(reader["fecha"].ToString());
 				logs.Add(new Log() {
 					User = reader["username"].ToString(),
-					Fecha = Convert.ToDateTime(reader["fecha"]),
-					Hora = Convert.ToDateTime(reader["hora"]),
+					Fecha = reader.GetString(0),
+					Hora = reader.GetString(1),
 					Text = reader["log"].ToString()
 				});
 			}
@@ -256,10 +254,76 @@ namespace inventario
 			connection.Close();
 			return logs;
 		}
-	}
 
-		/*public void getLogsDates()
+		public List<Log> getLogsDates(DateTime from, DateTime to)
 		{
-		;
-		}*/
+			List<Log> logs = new List<Log>();
+			string query = Query.GetLogs(from.ToShortDateString(), to.ToShortDateString());
+			SQLiteCommand command;
+			connection.Open();
+			command = new SQLiteCommand(query, connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			while (reader.Read())
+			{
+				logs.Add(new Log()
+				{
+					User = reader["username"].ToString(),
+					Fecha = reader.GetString(0),
+					Hora = reader.GetString(1),
+					Text = reader["log"].ToString()
+				});
+			}
+			reader.Close();
+			connection.Close();
+			return logs;
+		}
+
+		public List<User> getAllUsers()
+		{
+			List<User> users = new List<User>();
+			string query = Query.GET_ALL_USERS;
+			SQLiteCommand command;
+			connection.Open();
+			command = new SQLiteCommand(query, connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			while (reader.Read())
+			{
+				users.Add(new User()
+				{
+					Username = reader["username"].ToString(),
+					UserId = Convert.ToInt32(reader["user_id"]),
+					UserLevel = Convert.ToInt32(reader["level"])
+				});
+			}
+			reader.Close();
+			connection.Close();
+			return users;
+		}
+
+		public void updateUser(int user, string password, int level, int active)
+		{
+			string query;
+			SQLiteCommand command;
+			connection.Open();
+			SQLiteTransaction transaction = connection.BeginTransaction();
+			query = Query.UpdateUser(user, password, level, active);
+			command = new SQLiteCommand(query, connection);
+			command.ExecuteNonQuery();
+			transaction.Commit();
+			connection.Close();
+		}
+
+		public void newUser(string username, string password, int level)
+		{
+			string query;
+			SQLiteCommand command;
+			connection.Open();
+			SQLiteTransaction transaction = connection.BeginTransaction();
+			query = Query.NewUser(username, password, level);
+			command = new SQLiteCommand(query, connection);
+			command.ExecuteNonQuery();
+			transaction.Commit();
+			connection.Close();
+		}
+	}
 }

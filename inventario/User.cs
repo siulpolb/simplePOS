@@ -12,6 +12,11 @@ namespace inventario
 		public int UserId { get; set; }
 		public int UserLevel { get; set; }
 
+		public User()
+		{
+
+		}
+
 		public User(int userId, string username, int level)
 		{
 			this.UserId = userId;

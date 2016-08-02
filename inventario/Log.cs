@@ -9,18 +9,16 @@ namespace inventario
 	public class Log
 	{
 		public string User { get; set; }
-		public DateTime Fecha { get; set; }
-		public DateTime Hora { get; set; }
+		public string Fecha { get; set; }
+		public string Hora { get; set; }
 		public string Text { get; set; }
 
 		public object[] toObjectArray()
 		{
 			object[] array = new object[4];
-			array[0] = this.User;
-			//array[1] = this.Fecha;
-			//array[2] = this.Hora;
-			array[1] = this.Fecha.ToShortDateString();
-			array[2] = this.Hora.ToLongTimeString();
+			array[0] = this.Fecha;
+			array[1] = this.Hora;
+			array[2] = this.User;
 			array[3] = this.Text;
 			return array;
 		}

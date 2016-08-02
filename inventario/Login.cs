@@ -20,6 +20,7 @@ namespace inventario
 		{
 			InitializeComponent();
 			this.db = db;
+			this.DialogResult = DialogResult.Cancel;
 		}
 
 		private void btnLogin_Click(object sender, EventArgs e)
@@ -32,6 +33,8 @@ namespace inventario
 				this.DialogResult = DialogResult.OK;
 				this.Close();
 			}
+			else
+				MessageBox.Show("Usuario o Contraseña Incorrectos");
 		}
 
 		private bool isValid()
@@ -48,7 +51,7 @@ namespace inventario
 
 		private void btnCancelar_Click(object sender, EventArgs e)
 		{
-			this.DialogResult = DialogResult.Abort;
+			this.DialogResult = DialogResult.Cancel;
 			this.Close();
 		}
 
