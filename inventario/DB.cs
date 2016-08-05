@@ -259,6 +259,7 @@ namespace inventario
 		{
 			List<Log> logs = new List<Log>();
 			string query = Query.GetLogs(from.ToShortDateString(), to.ToShortDateString());
+			Console.WriteLine(query);
 			SQLiteCommand command;
 			connection.Open();
 			command = new SQLiteCommand(query, connection);
@@ -324,6 +325,108 @@ namespace inventario
 			command.ExecuteNonQuery();
 			transaction.Commit();
 			connection.Close();
+		}
+
+		public List<Sale> getAllSales()
+		{
+			List<Sale> sales = new List<Sale>();
+			string query = Query.GET_ALL_SALES;
+			SQLiteCommand command;
+			connection.Open();
+			command = new SQLiteCommand(query, connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			while (reader.Read())
+			{
+				sales.Add(new Sale()
+				{
+					Fecha = reader.GetString(0),
+					Hora = reader.GetString(1),
+					User = reader.GetString(2),
+					Product = reader.GetString(3),
+					Quantity = reader.GetDouble(4),
+					Price = reader.GetDouble(5)
+				});
+			}
+			reader.Close();
+			connection.Close();
+			return sales;
+		}
+
+		public List<Sale> getAllIncomes()
+		{
+			List<Sale> incomes = new List<Sale>();
+			string query = Query.GET_ALL_INCOMES;
+			SQLiteCommand command;
+			connection.Open();
+			command = new SQLiteCommand(query, connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			while (reader.Read())
+			{
+				incomes.Add(new Sale()
+				{
+					Fecha = reader.GetString(0),
+					Hora = reader.GetString(1),
+					User = reader.GetString(2),
+					Product = reader.GetString(3),
+					Quantity = reader.GetDouble(4),
+					Price = reader.GetDouble(5)
+				});
+			}
+			reader.Close();
+			connection.Close();
+			return incomes;
+		}
+
+		public List<Sale> getSales(DateTime initDate, DateTime endDate)
+		{
+			List<Sale> sales = new List<Sale>();
+			string query = Query.GetSales(initDate.ToShortDateString(), endDate.ToShortDateString());
+			Console.WriteLine(query);
+			SQLiteCommand command;
+			connection.Open();
+			command = new SQLiteCommand(query, connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			while (reader.Read())
+			{
+				sales.Add(new Sale()
+				{
+					Fecha = reader.GetString(0),
+					Hora = reader.GetString(1),
+					User = reader.GetString(2),
+					Product = reader.GetString(3),
+					Quantity = reader.GetDouble(4),
+					Price = reader.GetDouble(5)
+				});
+			}
+			reader.Close();
+			connection.Close();
+			return sales;
+		}
+
+		public List<Sale> getIncomes(DateTime initDate, DateTime endDate)
+		{
+			List<Sale> incomes = new List<Sale>();
+			string query = Query.GetIncomes(initDate.ToShortDateString(), endDate.ToShortDateString());
+			Console.WriteLine(query);
+			SQLiteCommand command;
+			connection.Open();
+			command = new SQLiteCommand(query, connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			while (reader.Read())
+			{
+				incomes.Add(new Sale()
+				{
+					Fecha = reader.GetString(0),
+					Hora = reader.GetString(1),
+					User = reader.GetString(2),
+					Product = reader.GetString(3),
+					Quantity = reader.GetDouble(4),
+					Price = reader.GetDouble(5)
+				});
+			}
+			reader.Close();
+			connection.Close();
+			return incomes;
 		}
 	}
 }

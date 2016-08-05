@@ -138,7 +138,7 @@ namespace inventario
 				if (user == null)
 				{
 					db.newUser(tbUser.Text, tbPassword.Text, getCheckedPermissions());
-					MessageBox.Show("Usuario actualizado con exito");
+					MessageBox.Show("Usuario creado con exito");
 				}
 				else
 				{
@@ -156,7 +156,6 @@ namespace inventario
 				tbUser.Focus();
 			}
 		}
-
 
 		private void clearCLB()
 		{

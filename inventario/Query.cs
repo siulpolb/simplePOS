@@ -25,6 +25,8 @@ namespace inventario
 		public static string GET_TYPES = "SELECT type_id, name from types";
 		public static string GET_ALL_LOGS = "SELECT fecha, hora, username, log FROM log, users WHERE user=user_id";
 		public static string GET_ALL_USERS = "SELECT user_id, username, level from users where active = 1";
+		public static string GET_ALL_INCOMES = "SELECT fecha, hora, username, item, incomes.quantity, incomes.price FROM incomes, products, users WHERE user=user_id AND product = product_id";
+		public static string GET_ALL_SALES = "SELECT fecha, hora, username, item, sales.quantity, sales.price FROM sales, products, users WHERE user=user_id AND product = product_id";
 
 
 		#region FUNCTIONS
@@ -99,6 +101,16 @@ namespace inventario
 		public static string NewUser(string username, string password, int level)
 		{
 			return "INSERT INTO users VALUES(NULL,'"+username+"','"+password+"',"+level+",1)";
+		}
+
+		public static string GetSales(string initDate, string endDate)
+		{
+			return "SELECT fecha, hora, username, item, sales.quantity, sales.price FROM sales, products, users WHERE user=user_id AND product = product_id AND " + "fecha >= '" + initDate + "' AND fecha <= '" + endDate + "'";
+		}
+
+		public static string GetIncomes(string initDate, string endDate)
+		{
+			return "SELECT fecha, hora, username, item, incomes.quantity, incomes.price FROM incomes, products, users WHERE user=user_id AND product = product_id AND " + "fecha >= '" + initDate + "' AND fecha <= '" + endDate + "'";
 		}
 
 		#endregion
