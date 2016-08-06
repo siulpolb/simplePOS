@@ -304,7 +304,22 @@ namespace inventario
 
 		public bool userExist(string username)
 		{
-
+			bool exists = false;
+			int count = 0;
+			string query = Query.UserExist(username);
+			SQLiteCommand command;
+			connection.Open();
+			command = new SQLiteCommand(query, connection);
+			SQLiteDataReader reader = command.ExecuteReader();
+			while (reader.Read())
+			{
+				count = reader.GetInt32(0);
+			}
+			reader.Close();
+			connection.Close();
+			if (count > 0)
+				exists = true;
+			return exists;
 		}
 
 		public void updateUser(int user, string password, int level, int active)

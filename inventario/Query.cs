@@ -113,6 +113,11 @@ namespace inventario
 			return "SELECT date_time as fecha, date_time as hora, username, item, incomes.quantity, incomes.price FROM incomes, products, users WHERE user=user_id AND product = product_id AND " + "fecha >= '" + initDate + "' AND fecha <= '" + endDate + "'";
 		}
 
+		public static string UserExist(string username)
+		{
+			return "SELECT COUNT(username) FROM users WHERE username = '" + username + "'";
+		}
+
 		#endregion
 
 		public static string FILL_TEST_DATA = "INSERT INTO types VALUES(NULL, 'Refrescos');INSERT INTO types VALUES(NULL, 'Salchichoneria');INSERT INTO products VALUES (NULL,'Coca Cola 10 ml', 'pieza',1,5,10,10,8,1);INSERT INTO products VALUES (NULL,'Rajas 10 gr', 'pieza',1,5,10,5.5,3.5,1);";

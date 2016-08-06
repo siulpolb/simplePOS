@@ -135,7 +135,7 @@ namespace inventario
 			if(tbUser.Text != "" && tbPassword.Text != "")
 			{
 				User user = findUserByUsername(tbUser.Text);
-				if (user == null)
+				if (user == null && !db.userExist(tbUser.Text))
 				{
 					db.newUser(tbUser.Text, tbPassword.Text, getCheckedPermissions());
 					MessageBox.Show("Usuario creado con exito");
