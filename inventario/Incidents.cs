@@ -58,7 +58,7 @@ namespace inventario
 
 		private void btnToday_Click(object sender, EventArgs e)
 		{
-			logs = db.getLogsDates(DateTime.Now, DateTime.Now);
+			logs = db.getLogsDates(DateTime.Today, DateTime.Now);
 			fillIncidents();
 		}
 

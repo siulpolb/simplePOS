@@ -245,8 +245,8 @@ namespace inventario
 			{
 				logs.Add(new Log() {
 					User = reader["username"].ToString(),
-					Fecha = reader.GetString(0),
-					Hora = reader.GetString(1),
+					Fecha = FromUnixTime(reader.GetInt64(0)).ToShortDateString(),
+					Hora = FromUnixTime(reader.GetInt64(1)).ToLongTimeString(),
 					Text = reader["log"].ToString()
 				});
 			}
@@ -258,8 +258,9 @@ namespace inventario
 		public List<Log> getLogsDates(DateTime from, DateTime to)
 		{
 			List<Log> logs = new List<Log>();
-			string query = Query.GetLogs(from.ToShortDateString(), to.ToShortDateString());
-			Console.WriteLine(query);
+			string initDate = ToUnixTime(from).ToString();
+			string endDate = ToUnixTime(to).ToString();
+			string query = Query.GetLogs(initDate, endDate);
 			SQLiteCommand command;
 			connection.Open();
 			command = new SQLiteCommand(query, connection);
@@ -269,8 +270,8 @@ namespace inventario
 				logs.Add(new Log()
 				{
 					User = reader["username"].ToString(),
-					Fecha = reader.GetString(0),
-					Hora = reader.GetString(1),
+					Fecha = FromUnixTime(reader.GetInt64(0)).ToShortDateString(),
+					Hora = FromUnixTime(reader.GetInt64(1)).ToLongTimeString(),
 					Text = reader["log"].ToString()
 				});
 			}
@@ -299,6 +300,11 @@ namespace inventario
 			reader.Close();
 			connection.Close();
 			return users;
+		}
+
+		public bool userExist(string username)
+		{
+
 		}
 
 		public void updateUser(int user, string password, int level, int active)
@@ -339,8 +345,8 @@ namespace inventario
 			{
 				sales.Add(new Sale()
 				{
-					Fecha = reader.GetString(0),
-					Hora = reader.GetString(1),
+					Fecha = FromUnixTime(reader.GetInt64(0)).ToShortDateString(),
+					Hora = FromUnixTime(reader.GetInt64(1)).ToLongTimeString(),
 					User = reader.GetString(2),
 					Product = reader.GetString(3),
 					Quantity = reader.GetDouble(4),
@@ -364,8 +370,8 @@ namespace inventario
 			{
 				incomes.Add(new Sale()
 				{
-					Fecha = reader.GetString(0),
-					Hora = reader.GetString(1),
+					Fecha = FromUnixTime(reader.GetInt64(0)).ToShortDateString(),
+					Hora = FromUnixTime(reader.GetInt64(1)).ToLongTimeString(),
 					User = reader.GetString(2),
 					Product = reader.GetString(3),
 					Quantity = reader.GetDouble(4),
@@ -380,8 +386,9 @@ namespace inventario
 		public List<Sale> getSales(DateTime initDate, DateTime endDate)
 		{
 			List<Sale> sales = new List<Sale>();
-			string query = Query.GetSales(initDate.ToShortDateString(), endDate.ToShortDateString());
-			Console.WriteLine(query);
+			string from = ToUnixTime(initDate).ToString();
+			string to = ToUnixTime(endDate).ToString();
+			string query = Query.GetSales(from, to);
 			SQLiteCommand command;
 			connection.Open();
 			command = new SQLiteCommand(query, connection);
@@ -390,8 +397,8 @@ namespace inventario
 			{
 				sales.Add(new Sale()
 				{
-					Fecha = reader.GetString(0),
-					Hora = reader.GetString(1),
+					Fecha = FromUnixTime(reader.GetInt64(0)).ToShortDateString(),
+					Hora = FromUnixTime(reader.GetInt64(1)).ToLongTimeString(),
 					User = reader.GetString(2),
 					Product = reader.GetString(3),
 					Quantity = reader.GetDouble(4),
@@ -406,8 +413,9 @@ namespace inventario
 		public List<Sale> getIncomes(DateTime initDate, DateTime endDate)
 		{
 			List<Sale> incomes = new List<Sale>();
-			string query = Query.GetIncomes(initDate.ToShortDateString(), endDate.ToShortDateString());
-			Console.WriteLine(query);
+			string from = ToUnixTime(initDate).ToString();
+			string to = ToUnixTime(endDate).ToString();
+			string query = Query.GetIncomes(from, to);
 			SQLiteCommand command;
 			connection.Open();
 			command = new SQLiteCommand(query, connection);
@@ -416,8 +424,8 @@ namespace inventario
 			{
 				incomes.Add(new Sale()
 				{
-					Fecha = reader.GetString(0),
-					Hora = reader.GetString(1),
+					Fecha = FromUnixTime(reader.GetInt64(0)).ToShortDateString(),
+					Hora = FromUnixTime(reader.GetInt64(1)).ToLongTimeString(),
 					User = reader.GetString(2),
 					Product = reader.GetString(3),
 					Quantity = reader.GetDouble(4),
@@ -427,6 +435,18 @@ namespace inventario
 			reader.Close();
 			connection.Close();
 			return incomes;
+		}
+
+		public DateTime FromUnixTime(long unixTime)
+		{
+			var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+			return epoch.AddSeconds(unixTime).ToLocalTime();
+		}
+
+		public long ToUnixTime(DateTime date)
+		{
+			var epoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+			return Convert.ToInt64((date.ToUniversalTime() - epoch).TotalSeconds);
 		}
 	}
 }

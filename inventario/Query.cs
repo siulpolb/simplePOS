@@ -13,9 +13,9 @@ namespace inventario
 		public static string CREATE_TABLE_TYPES = "CREATE TABLE IF NOT EXISTS types (type_id INTEGER PRIMARY KEY, name VARCHAR(50))";
 		public static string CREATE_TABLE_PRODUCTS = "CREATE TABLE IF NOT EXISTS products (product_id INTEGER PRIMARY KEY, item VARCHAR(100), unit VARCHAR(10), type INT, minimum_stock FLOAT, current_stock FLOAT, price FLOAT, buy_price FLOAT,active BOOLEAN, FOREIGN KEY(type) REFERENCES types(type_id))";
 		public static string CREATE_TABLE_USERS = "CREATE TABLE IF NOT EXISTS users (user_id INTEGER PRIMARY KEY, username VARCHAR(10) UNIQUE, password VARCHAR(100), level INT, active INT)";
-		public static string CREATE_TABLE_SALES = "CREATE TABLE IF NOT EXISTS sales (fecha DATE, hora TIME, product INT, user INT, quantity FLOAT, price FLOAT)";
-		public static string CREATE_TABLE_INCOMES = "CREATE TABLE IF NOT EXISTS incomes (fecha DATE, hora TIME, product INT, user INT,  quantity FLOAT, price FLOAT)";
-		public static string CREATE_TABLE_LOG = "CREATE TABLE IF NOT EXISTS log (fecha DATE, hora TIME, user INT, log TEXT)";
+		public static string CREATE_TABLE_SALES = "CREATE TABLE IF NOT EXISTS sales (date_time INTEGER, product INT, user INT, quantity FLOAT, price FLOAT)";
+		public static string CREATE_TABLE_INCOMES = "CREATE TABLE IF NOT EXISTS incomes (date_time INTEGER, product INT, user INT,  quantity FLOAT, price FLOAT)";
+		public static string CREATE_TABLE_LOG = "CREATE TABLE IF NOT EXISTS log (date_time INTEGER, user INT, log TEXT)";
 
 		#endregion
 
@@ -23,10 +23,10 @@ namespace inventario
 
 		public static string GET_ALL_PRODUCTS = "SELECT product_id, item, unit, types.name as type, minimum_stock, current_stock, price, buy_price FROM products, types WHERE products.type = types.type_id AND products.active = 1";
 		public static string GET_TYPES = "SELECT type_id, name from types";
-		public static string GET_ALL_LOGS = "SELECT fecha, hora, username, log FROM log, users WHERE user=user_id";
+		public static string GET_ALL_LOGS = "SELECT date_time as fecha, date_time as hora, username, log FROM log, users WHERE user=user_id";
 		public static string GET_ALL_USERS = "SELECT user_id, username, level from users where active = 1";
-		public static string GET_ALL_INCOMES = "SELECT fecha, hora, username, item, incomes.quantity, incomes.price FROM incomes, products, users WHERE user=user_id AND product = product_id";
-		public static string GET_ALL_SALES = "SELECT fecha, hora, username, item, sales.quantity, sales.price FROM sales, products, users WHERE user=user_id AND product = product_id";
+		public static string GET_ALL_INCOMES = "SELECT date_time as fecha, date_time as hora, username, item, incomes.quantity, incomes.price FROM incomes, products, users WHERE user=user_id AND product = product_id";
+		public static string GET_ALL_SALES = "SELECT date_time as fecha, date_time as hora, username, item, sales.quantity, sales.price FROM sales, products, users WHERE user=user_id AND product = product_id";
 
 
 		#region FUNCTIONS
@@ -38,12 +38,12 @@ namespace inventario
 
 		public static string Sell(int product, double quantity, int user, double price)
 		{
-			return "INSERT INTO sales VALUES ('" + DateTime.Now.ToShortDateString() + "','" + DateTime.Now.ToLongTimeString() + "'," + product + "," + user + "," + quantity + "," + price + ")";
+			return "INSERT INTO sales VALUES (strftime('%s', 'now')," + product + "," + user + "," + quantity + "," + price + ")";
 		}
 
 		public static string Buy(int product, double quantity, int user, double price)
 		{
-			return "INSERT INTO incomes VALUES ('" + DateTime.Now.ToShortDateString() + "','" + DateTime.Now.ToLongTimeString() + "'," + product + "," + user + "," + quantity + "," + price + ")";
+			return "INSERT INTO incomes VALUES (strftime('%s', 'now')," + product + "," + user + "," + quantity + "," + price + ")";
 		}
 
 		public static string UpdateStock(int product, double quantity, bool increase)
@@ -81,12 +81,12 @@ namespace inventario
 
 		public static string NewLog(int user, string text)
 		{
-			return "INSERT INTO log VALUES ('" + DateTime.Now.ToShortDateString() + "','" + DateTime.Now.ToLongTimeString() + "'," + user+",'"+text+"')";
+			return "INSERT INTO log VALUES (strftime('%s', 'now')," + user+",'"+text+"')";
 		}
 
 		public static string GetLogs(string initDate, string endDate)
 		{
-			return "SELECT fecha, hora, username, log FROM log, users WHERE user=user_id AND "+ "fecha >= '"+initDate+"' AND fecha <= '"+endDate+"'";
+			return "SELECT date_time as fecha, date_time as hora, username, log FROM log, users WHERE user=user_id AND "+ "fecha >= '"+initDate+"' AND fecha <= '"+endDate+"'";
 		}
 
 		public static string UpdateUser(int user, string password, int level, int active)
@@ -105,12 +105,12 @@ namespace inventario
 
 		public static string GetSales(string initDate, string endDate)
 		{
-			return "SELECT fecha, hora, username, item, sales.quantity, sales.price FROM sales, products, users WHERE user=user_id AND product = product_id AND " + "fecha >= '" + initDate + "' AND fecha <= '" + endDate + "'";
+			return "SELECT date_time as fecha, date_time as hora, username, item, sales.quantity, sales.price FROM sales, products, users WHERE user=user_id AND product = product_id AND " + "fecha >= '" + initDate + "' AND fecha <= '" + endDate + "'";
 		}
 
 		public static string GetIncomes(string initDate, string endDate)
 		{
-			return "SELECT fecha, hora, username, item, incomes.quantity, incomes.price FROM incomes, products, users WHERE user=user_id AND product = product_id AND " + "fecha >= '" + initDate + "' AND fecha <= '" + endDate + "'";
+			return "SELECT date_time as fecha, date_time as hora, username, item, incomes.quantity, incomes.price FROM incomes, products, users WHERE user=user_id AND product = product_id AND " + "fecha >= '" + initDate + "' AND fecha <= '" + endDate + "'";
 		}
 
 		#endregion

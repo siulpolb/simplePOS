@@ -24,6 +24,9 @@ namespace inventario
 			InitializeComponent();
 			this.db = db;
 			dtpFrom.Value = DateTime.Now;
+			sales = db.getSales(DateTime.Now.AddDays(-7), DateTime.Now);
+			incomes = db.getIncomes(DateTime.Now.AddDays(-7), DateTime.Now);
+			fillData();
 		}
 
 		private void dtpFrom_ValueChanged(object sender, EventArgs e)
@@ -79,8 +82,8 @@ namespace inventario
 
 		private void btnToday_Click(object sender, EventArgs e)
 		{
-			sales = db.getSales(DateTime.Now, DateTime.Now);
-			incomes = db.getIncomes(DateTime.Now, DateTime.Now);
+			sales = db.getSales(DateTime.Today, DateTime.Now);
+			incomes = db.getIncomes(DateTime.Today, DateTime.Now);
 			fillData();
 		}
 
