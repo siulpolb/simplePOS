@@ -19,7 +19,7 @@ namespace inventario
 
 		#endregion
 
-		public static string INSERT_SUPER_USER = "INSERT INTO users VALUES (NULL, 'siulpolb', 'anarchy', 255,1)";
+		public static string INSERT_SUPER_USER = "INSERT INTO users VALUES (NULL, 'carlos', 'carlos2016', 255,1)";
 
 		public static string GET_ALL_PRODUCTS = "SELECT product_id, item, unit, types.name as type, minimum_stock, current_stock, price, buy_price FROM products, types WHERE products.type = types.type_id AND products.active = 1";
 		public static string GET_TYPES = "SELECT type_id, name from types";
